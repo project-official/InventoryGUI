@@ -45,6 +45,7 @@ If you did the above, you can use the plugin using this dependency.
 * Gradle
 ```groovy
 repositories {
+  jcenter()
   maven {
     url = 'https://jitpack.io'
   }
@@ -58,10 +59,12 @@ dependencies {
 * Gradle (Kotlin DSL)
 ```kotlin
 repositories {
+  jcenter()
   maven("https://jitpack.io")
 }
 
 dependencies {
+  jcenter()
   compileOnly("com.github.ProjectTL12345:InventoryGUI:VERSION")
 }
 ```
