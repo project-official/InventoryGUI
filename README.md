@@ -1,11 +1,18 @@
 # InventoryGUI
-This is Minecraft paper plugin for Java.
+This is Minecraft paper API plugin for Java.
+
+* [API Feauture](https://github.com/ProjectTL12345/InventoryGUI#api-feature)
+* [API License](https://github.com/ProjectTL12345/InventoryGUI#api-license)
+* [How to use this API in server](https://github.com/ProjectTL12345/InventoryGUI#how-to-use-this-api-in-server)
+* [API Build](https://github.com/ProjectTL12345/InventoryGUI#api-build)
+* [How to use this API dependency](https://github.com/ProjectTL12345/InventoryGUI#how-to-use-this-api-dependency)
 
 ## API Feature
 * Making inventory gui Items
 * Exit inventory listener
 
 ## API License
+This API uses the GPL-3.0 open source license.
 * License: [InventoryGUI License](https://github.com/ProjectTL12345/InventoryGUI/blob/master/LICENSE)
 
 ## How to use this API in server
