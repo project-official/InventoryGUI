@@ -42,7 +42,7 @@ If you did the above, you can use the plugin using this dependency.
 </dependency>
 ```
 
-* Gradle
+* Gradle (Groovy DSL)
 ```groovy
 repositories {
   jcenter()
@@ -89,9 +89,27 @@ public void onExample() {
   );
 }
 ```
+
+* Groovy
+```Groovy
+void onExample() {
+  Inventory inventory = Bukkit.createInventory(null, 27, "Test GUI")
+  AddGuiItem setItem = new AddGuiItem() // Please define this class!
   
+  setItem.onCreateItem(
+    inventory, // Get your own inventory
+    26, // Item Location
+    Material.BARRIER, // Item Type
+    ChatColor.GREEN + "Test", // Item Name
+    Arrays.asList(ChatColor.BLUE + "This is Real Test."), // Item Lore
+    1, // Item Amount
+    false // Set Enchantment false or true
+  )
+}
+```
+
 * Kotlin
-```Java
+```Kotlin
 fun onExample() {
   val inventory = Bukkit.createInventory(null, 27, "Test GUI")
   val setItem = AddGuiItem() // Please define this class!
@@ -138,9 +156,20 @@ public void onExample() {
   setItem.onCreateExitButton(inventory, 26);
 }
 ```
+
+* Groovy
+```Groovy
+void onExample() {
+  Inventory inventory = Bukkit.createInventory(null, 27, "Test GUI")
+  AddGuiItem setItem = new AddGuiItem() // Please define this class!
+  --- // Ignore it
+  
+  setItem.onCreateExitButton(inventory, 26)
+}
+```
   
 * Kotlin
-```Java
+```Kotlin
 fun onExample() {
   val inventory = Bukkit.createInventory(null, 27, "Test GUI")
   val setItem = AddGuiItem() // Please define this class!
