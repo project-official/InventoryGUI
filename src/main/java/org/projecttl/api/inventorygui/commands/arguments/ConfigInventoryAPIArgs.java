@@ -50,6 +50,6 @@ public class ConfigInventoryAPIArgs implements TabCompleter {
             }
         }
 
-        return onTabComplete(sender, command, alias, args);
+        return null;
     }
 }
