@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import java.util.Objects;
+
 public class ExitEvent implements Listener {
 
     @EventHandler
@@ -13,7 +15,7 @@ public class ExitEvent implements Listener {
         Player player = (Player) event.getWhoClicked();
 
         if (event.getView().getTitle().equalsIgnoreCase(getInventoryName)) {
-            if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.DARK_RED + "Exit")) {
+            if (Objects.requireNonNull(event.getCurrentItem()).getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.DARK_RED + "Exit")) {
                 player.closeInventory();
                 event.setCancelled(true);
             }
