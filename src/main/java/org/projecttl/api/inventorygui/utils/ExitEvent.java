@@ -10,11 +10,17 @@ import java.util.Objects;
 
 public class ExitEvent implements Listener {
 
+    public ExitEvent(String getInventoryName) {
+        inventoryName = getInventoryName;
+    }
+
+    static String inventoryName;
+
     @EventHandler
-    public void onClickedExitButton(InventoryClickEvent event, String getInventoryName) {
+    public void onClickedExitButton(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
-        if (event.getView().getTitle().equalsIgnoreCase(getInventoryName)) {
+        if (event.getView().getTitle().equalsIgnoreCase(inventoryName)) {
             if (Objects.requireNonNull(event.getCurrentItem()).getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.DARK_RED + "Exit")) {
                 player.closeInventory();
                 event.setCancelled(true);
