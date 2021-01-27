@@ -144,7 +144,7 @@ def onExample(): Unit = {
 }
 ```
 
-### Exit inventory listener
+### Exit inventory button
 
 * Java
 ```Java
@@ -187,5 +187,44 @@ def onExample(): Unit = {
   --- // Ignore it
   
   setItem.onCreateExitButton(inventory, 26)
+}
+```
+
+### ExitEvent
+* Java
+```Java
+@Override
+public void onEnable() {
+  ...
+
+  getServer().getPluginManager().registerEvents(ExitEvent(inventoryName), this);
+}
+```
+
+* Groovy
+```Groovy
+@Override
+void onEnable() {
+  ...
+  
+  server.pluginManager.registerEvents(ExitEvent(inventoryName), this);
+}
+```
+
+* Kotlin
+```Kotlin
+override fun onEnable() {
+  ...
+  
+  server.pluginManager.registerEvents(ExitEvent(inventoryName), this)
+}
+```
+
+* Scala
+```Scala
+override def onEnable(): Unit = {
+  ...
+  
+  getServer.getPluginManager.registerEvents(ExitEvent(inventoryName), this)
 }
 ```
