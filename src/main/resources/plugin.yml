@@ -1,9 +1,9 @@
 name: InventoryGUI
-version: 1.0v
+version: $apiVersion
 api-version: 1.16
 main: org.projecttl.api.inventorygui.InventoryGUI
 
 commands:
   gui:
-    description: You can see api description.
-    usage: /gui
+    description: You can see api description or open test gui.
+    usage: /gui test

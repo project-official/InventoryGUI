@@ -2,11 +2,19 @@ package org.projecttl.api.inventorygui.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.inventory.Inventory;
+import org.projecttl.api.inventorygui.InventoryGUI;
+import org.projecttl.api.inventorygui.utils.AddGuiItem;
 
 public class ConfigInventoryAPI implements CommandExecutor {
+
+    public static String inventoryName = ChatColor.GREEN + "Test GUI";
+    public static String item_1 = ChatColor.GOLD + "Test_1";
+    public static String item_2 = ChatColor.BLUE + "Test_2";
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -16,7 +24,7 @@ public class ConfigInventoryAPI implements CommandExecutor {
 
             if (args.length == 0) {
                 sender.sendMessage("§6===========§f[§aInventory_GUI§f]§6===========");
-                sender.sendMessage(ChatColor.YELLOW + "API Version:" + ChatColor.AQUA + " 1.0v");
+                sender.sendMessage(ChatColor.YELLOW + "API Version:" + ChatColor.AQUA + " 1.2v");
                 sender.sendMessage(ChatColor.YELLOW + "Minecraft Version: " + ChatColor.GREEN + server);
                 sender.sendMessage(ChatColor.YELLOW + "Author:" + ChatColor.AQUA + " Project_TL");
                 sender.sendMessage(ChatColor.YELLOW + "Helper:" + ChatColor.LIGHT_PURPLE + " None");
@@ -29,7 +37,34 @@ public class ConfigInventoryAPI implements CommandExecutor {
             else if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("test")) {
                     if (args[1].equalsIgnoreCase("test")) {
-                        sender.sendMessage("<Inventory_GUI> §6This is easter egg!");
+                        AddGuiItem item = new AddGuiItem();
+                        Inventory inventory = Bukkit.createInventory(null, 27, inventoryName);
+
+                        item.onCreateItem(
+                                inventory,
+                                10,
+                                Material.BEDROCK,
+                                item_1,
+                                null,
+                                1,
+                                false
+                        );
+
+                        item.onCreateItem(
+                                inventory,
+                                13,
+                                Material.COMPASS,
+                                item_2,
+                                null,
+                                1,
+                                false
+                        );
+
+                        item.onCreateExitButton(
+                                inventory,
+                                16
+                        );
+
                         return true;
                     }
                 }

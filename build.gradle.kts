@@ -16,6 +16,9 @@ dependencies {
     compileOnly("com.destroystokyo.paper:paper-api:1.16.3-R0.1-SNAPSHOT")
 }
 
+val shade = configurations.create("shade")
+shade.extendsFrom(configurations.implementation.get())
+
 tasks {
     javadoc {
         options.encoding = "UTF-8"
@@ -25,13 +28,19 @@ tasks {
         options.encoding = "UTF-8"
     }
 
+    processResources {
+        filesMatching("*.yml") {
+            expand(project.properties)
+        }
+    }
+
     create<Jar>("sourceJar") {
         archiveClassifier.set("source")
         from(sourceSets["main"].allSource)
     }
 
-    shadowJar {
-        from("sourceJar")
+    jar {
+        from (shade.map { if (it.isDirectory) it else zipTree(it) })
     }
 }
 
