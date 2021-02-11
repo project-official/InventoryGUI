@@ -9,7 +9,7 @@ This is Minecraft paper API plugin for Java.
 
 ## API Feature
 * Simple create inventory gui
-* ~~Modular inventory gui with no event declaration required (Coming soon)~~
+* ~~Modular inventory gui with no event declaration required~~ (Coming soon)
 
 ## API License
 This API uses the GPL-3.0 open source license.
