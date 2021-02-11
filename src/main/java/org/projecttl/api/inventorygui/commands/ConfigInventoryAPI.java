@@ -6,9 +6,10 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.projecttl.api.inventorygui.InventoryGUI;
-import org.projecttl.api.inventorygui.utils.AddGuiItem;
+import org.projecttl.api.inventorygui.utils.CreateGUI;
 
 public class ConfigInventoryAPI implements CommandExecutor {
 
@@ -37,34 +38,12 @@ public class ConfigInventoryAPI implements CommandExecutor {
             else if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("test")) {
                     if (args[1].equalsIgnoreCase("test")) {
-                        AddGuiItem item = new AddGuiItem();
-                        Inventory inventory = Bukkit.createInventory(null, 27, inventoryName);
+                        CreateGUI testGUI = new CreateGUI(27, inventoryName);
+                        testGUI.setItem(new ItemStack(Material.BEDROCK), item_1, 10);
+                        testGUI.setItem(new ItemStack(Material.COMPASS), item_2, 13);
+                        testGUI.setExitButton(16);
 
-                        item.onCreateItem(
-                                inventory,
-                                10,
-                                Material.BEDROCK,
-                                item_1,
-                                null,
-                                1,
-                                false
-                        );
-
-                        item.onCreateItem(
-                                inventory,
-                                13,
-                                Material.COMPASS,
-                                item_2,
-                                null,
-                                1,
-                                false
-                        );
-
-                        item.onCreateExitButton(
-                                inventory,
-                                16
-                        );
-
+                        testGUI.openInventory(((Player) sender));
                         return true;
                     }
                 }

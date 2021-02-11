@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains:annotations:20.1.0")
     compileOnly("com.destroystokyo.paper:paper-api:1.16.3-R0.1-SNAPSHOT")
 }
 

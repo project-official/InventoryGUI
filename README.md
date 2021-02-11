@@ -1,15 +1,15 @@
 # InventoryGUI
 This is Minecraft paper API plugin for Java.
 
-* [API Feauture](https://github.com/ProjectTL12345/InventoryGUI#api-feature)
+* [API Feature](https://github.com/ProjectTL12345/InventoryGUI#api-feature)
 * [API License](https://github.com/ProjectTL12345/InventoryGUI#api-license)
 * [How to use this API in server](https://github.com/ProjectTL12345/InventoryGUI#how-to-use-this-api-in-server)
 * [API Build](https://github.com/ProjectTL12345/InventoryGUI#api-build)
 * [How to use this API dependency](https://github.com/ProjectTL12345/InventoryGUI#how-to-use-this-api-dependency)
 
 ## API Feature
-* Making inventory gui Items
-* Exit inventory listener
+* Simple create inventory gui
+* ~~Modular inventory gui with no event declaration required (Coming soon)~~
 
 ## API License
 This API uses the GPL-3.0 open source license.
@@ -74,157 +74,48 @@ dependencies {
 
 * Java
 ```Java
-public void onExample() {
-  Inventory inventory = Bukkit.createInventory(null, 27, "Test GUI");
-  AddGuiItem setItem = new AddGuiItem(); // Please define this class!
-  
-  setItem.onCreateItem(
-    inventory, // Get your own inventory
-    26, // Item Location
-    Material.BARRIER, // Item Type
-    ChatColor.GREEN + "Test", // Item Name
-    Arrays.asList(ChatColor.BLUE + "This is Real Test."), // Item Lore
-    1, // Item Amount
-    false // Set Enchantment false or true
-  );
+public void onExample(Player player) {
+    CreateGUI test = new CreateGUI(27, "Test GUI");
+    test.setItem(new ItemStack(Material.DIAMOND_SWORD), "Test_Item", 1);
+    testGUI.setExitButton(16);
+
+    testGUI.openInventory(player);
 }
 ```
 
 * Groovy
 ```Groovy
-void onExample() {
-  Inventory inventory = Bukkit.createInventory(null, 27, "Test GUI")
-  AddGuiItem setItem = new AddGuiItem() // Please define this class!
-  
-  setItem.onCreateItem(
-    inventory, // Get your own inventory
-    26, // Item Location
-    Material.BARRIER, // Item Type
-    ChatColor.GREEN + "Test", // Item Name
-    Arrays.asList(ChatColor.BLUE + "This is Real Test."), // Item Lore
-    1, // Item Amount
-    false // Set Enchantment false or true
-  )
+void onExample(Player player) {
+    CreateGUI test = new CreateGUI(27, "Test GUI")
+    test.setItem(new ItemStack(Material.DIAMOND_SWORD), "Test_Item", 1)
+    testGUI.setExitButton(16)
+
+    testGUI.openInventory(player)
 }
 ```
 
 * Kotlin
 ```Kotlin
-fun onExample() {
-  val inventory = Bukkit.createInventory(null, 27, "Test GUI")
-  val setItem = AddGuiItem() // Please define this class!
-  
-  setItem.onCreateItem(
-    inventory, // Get your own inventory
-    26, // Item Location
-    Material.BARRIER, // Item Type
-    "${ChatColor.GREEN}Test", // Item Name
-    Arrays.asList("${ChatColor.BLUE}This is Real Test."), // Item Lore
-    1, // Item Amount
-    false // Set Enchantment false or true
-  )
+fun onExample(player: Player) {
+    val test = CreateGUI(27, "Test GUI").let { // You can define another variable
+        // Ex) test ->
+        it.setItem(ItemStack(Material.DIAMOND_SWORD), "Test_Item", 1)
+        it.setExitButton(16)
+        
+        it // You must return it
+    }
+
+    testGUI.openInventory(player);
 }
 ```
 
 * Scala
 ```Scala
-def onExample(): Unit = {
-  val inventory = Bukkit.createInventory(null, 27, "Test GUI")
-  val setItem = new AddGuiItem() // Please define this class!
-  
-  setItem.onCreateItem(
-    inventory, // Get your own inventory
-    26, // Item Location
-    Material.BARRIER, // Item Type
-    s"${ChatColor.GREEN}Test", // Item Name
-    Arrays.asList(s"${ChatColor.BLUE}This is Real Test."), // Item Lore
-    1, // Item Amount
-    false // Set Enchantment false or true
-  )
-}
-```
+def onExample(player: Player): Unit = {
+  val test = new CreateGUI(27, "Test GUI")
+  test.setItem(new ItemStack(Material.DIAMOND_SWORD), "Test_Item", 1)
+  testGUI.setExitButton(16)
 
-### Exit inventory button
-
-* Java
-```Java
-public void onExample() {
-  Inventory inventory = Bukkit.createInventory(null, 27, "Test GUI");
-  AddGuiItem setItem = new AddGuiItem(); // Please define this class!
-  --- // Ignore it
-  
-  setItem.onCreateExitButton(inventory, 26);
-}
-```
-
-* Groovy
-```Groovy
-void onExample() {
-  Inventory inventory = Bukkit.createInventory(null, 27, "Test GUI")
-  AddGuiItem setItem = new AddGuiItem() // Please define this class!
-  --- // Ignore it
-  
-  setItem.onCreateExitButton(inventory, 26)
-}
-```
-  
-* Kotlin
-```Kotlin
-fun onExample() {
-  val inventory = Bukkit.createInventory(null, 27, "Test GUI")
-  val setItem = AddGuiItem() // Please define this class!
-  --- // Ignore it
-  
-  setItem.onCreateExitButton(inventory, 26)
-}
-```
-
-* Scala
-```Scala
-def onExample(): Unit = {
-  val inventory = Bukkit.createInventory(null, 27, "Test GUI")
-  val setItem = new AddGuiItem() // Please define this class!
-  --- // Ignore it
-  
-  setItem.onCreateExitButton(inventory, 26)
-}
-```
-
-### ExitEvent
-* Java
-```Java
-@Override
-public void onEnable() {
-  ...
-
-  getServer().getPluginManager().registerEvents(ExitEvent(inventoryName), this);
-}
-```
-
-* Groovy
-```Groovy
-@Override
-void onEnable() {
-  ...
-  
-  server.pluginManager.registerEvents(ExitEvent(inventoryName), this);
-}
-```
-
-* Kotlin
-```Kotlin
-override fun onEnable() {
-  ...
-  
-  server.pluginManager.registerEvents(ExitEvent(inventoryName), this)
-}
-```
-
-* Scala
-```Scala
-override def onEnable(): Unit = {
-  ...
-  
-  getServer.getPluginManager.registerEvents(ExitEvent(inventoryName), this)
+  testGUI.openInventory(player)
 }
 ```

@@ -1,7 +1,8 @@
 name: InventoryGUI
+author: $apiAuthor
 version: $apiVersion
 api-version: 1.16
-main: org.projecttl.api.inventorygui.InventoryGUI
+main: $apiMain
 
 commands:
   gui:
