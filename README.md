@@ -64,7 +64,6 @@ repositories {
 }
 
 dependencies {
-  jcenter()
   compileOnly("com.github.ProjectTL12345:InventoryGUI:VERSION")
 }
 ```
