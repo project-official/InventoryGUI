@@ -3,8 +3,6 @@ package org.projecttl.api.inventorygui;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.projecttl.api.inventorygui.commands.ConfigInventoryAPI;
-import org.projecttl.api.inventorygui.commands.arguments.ConfigInventoryAPIArgs;
-import org.projecttl.api.inventorygui.listeners.TestGUI;
 
 import java.util.Objects;
 
@@ -14,10 +12,8 @@ public class InventoryGUI extends JavaPlugin {
     public void onEnable() {
         getLogger().info("<Inventory_GUI> " + ChatColor.GREEN + "API has successful enabled.");
 
-        Objects.requireNonNull(getCommand("gui")).setExecutor(new ConfigInventoryAPI());
-        Objects.requireNonNull(getCommand("gui")).setTabCompleter(new ConfigInventoryAPIArgs());
-
-        getServer().getPluginManager().registerEvents(new TestGUI(), this);
+        Objects.requireNonNull(getCommand("gui")).setExecutor(new ConfigInventoryAPI(this));
+        Objects.requireNonNull(getCommand("gui")).setTabCompleter(new ConfigInventoryAPI(this));
     }
 
     @Override

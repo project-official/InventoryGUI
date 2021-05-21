@@ -1,4 +1,4 @@
-name: InventoryGUI
+name: ${project.name}
 author: $apiAuthor
 version: $apiVersion
 api-version: 1.16

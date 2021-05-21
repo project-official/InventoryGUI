@@ -1,34 +1,40 @@
 package org.projecttl.api.inventorygui.utils;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
-public class CreateGUI implements Listener {
+public class CreateGUI {
 
-    private String name;
+    private TextComponent name;
     private Inventory inventory;
 
-    public CreateGUI(int size, String name) {
+    private final Plugin plugin;
+    public CreateGUI(int size, TextComponent name, Plugin plugin) {
         this.name = name;
         this.inventory = Bukkit.createInventory(null, size, name);
+        this.plugin = plugin;
     }
 
     /* Start name area */
 
-    public String setName(String getInventoryName) {
-        return name = getInventoryName;
+    public TextComponent setName(TextComponent inventoryName) {
+        return name = inventoryName;
     }
 
-    public String getName() {
+    public TextComponent getName() {
         return name;
     }
 
@@ -52,6 +58,95 @@ public class CreateGUI implements Listener {
         inventory.setItem(itemLocation, item);
     }
 
+    public void setItem(ItemStack item, TextComponent name, int itemLocation) {
+        ItemMeta meta = item.getItemMeta();
+        meta.displayName(name);
+        item.setItemMeta(meta);
+
+        inventory.setItem(itemLocation, item);
+    }
+
+    public void setItem(ItemStack item, TextComponent name, List<Component> lore, int itemLocation) {
+        ItemMeta meta = item.getItemMeta();
+        meta.displayName(name);
+        meta.lore(lore);
+        item.setItemMeta(meta);
+
+        inventory.setItem(itemLocation, item);
+    }
+
+    public void setItem(ItemStack item, TextComponent name, List<Component> lore, int itemLocation, boolean setEnchant) {
+        ItemMeta meta = item.getItemMeta();
+        meta.displayName(name);
+        meta.lore(lore);
+        item.setItemMeta(meta);
+
+        if (setEnchant) {
+            item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+        }
+
+        inventory.setItem(itemLocation, item);
+    }
+
+    /* End item Area */
+
+    /* Start event Area*/
+
+    public void addEvent(AddListener listener) {
+
+    }
+
+    /* End event Area */
+
+    /* Start Open Inventory */
+
+    public void openInventory(Player player) {
+        player.openInventory(inventory);
+    }
+
+    /* End Open Inventory */
+
+    public void setExit(TextComponent inventoryName, int itemLocation) {
+        setItem(new ItemStack(Material.BARRIER), Component.text(ChatColor.DARK_RED + "Exit"), itemLocation);
+        addEvent(
+        new AddListener(plugin) {
+            @Override
+            @EventHandler
+            public void onEvent(InventoryClickEvent event) {
+                Player player = (Player) event.getWhoClicked();
+
+                if (event.getView().title().equals(inventoryName)) {
+                    if (event.getCurrentItem().getItemMeta().displayName().equals(Component.text(ChatColor.DARK_RED + "Exit"))) {
+                        player.closeInventory();
+                        event.setCancelled(true);
+                    }
+                }
+            }
+        });
+    }
+
+    /* Deprecated Code START */
+
+    @Deprecated private String legacyName;
+
+    @Deprecated
+    public CreateGUI(int size, String name, Plugin plugin) {
+        this.legacyName = name;
+        this.inventory = Bukkit.createInventory(null, size, name);
+        this.plugin = plugin;
+    }
+
+    @Deprecated
+    public String setName(String getInventoryName) {
+        return legacyName = getInventoryName;
+    }
+
+    @Deprecated
+    public String getLegacyName() {
+        return legacyName;
+    }
+
+    @Deprecated
     public void setItem(ItemStack item, String name, int itemLocation) {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(name);
@@ -60,6 +155,7 @@ public class CreateGUI implements Listener {
         inventory.setItem(itemLocation, item);
     }
 
+    @Deprecated
     public void setItem(ItemStack item, String name, List<String> lore, int itemLocation) {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(name);
@@ -69,6 +165,7 @@ public class CreateGUI implements Listener {
         inventory.setItem(itemLocation, item);
     }
 
+    @Deprecated
     public void setItem(ItemStack item, String name, List<String> lore, int itemLocation, boolean setEnchant) {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(name);
@@ -82,17 +179,10 @@ public class CreateGUI implements Listener {
         inventory.setItem(itemLocation, item);
     }
 
-    /* End item Area */
-
-    /* Start Open Inventory */
-
-    public void openInventory(Player player) {
-        player.openInventory(inventory);
-    }
-
-    /* End Open Inventory */
-
+    @Deprecated
     public void setExitButton(int itemLocation) {
         setItem(new ItemStack(Material.BARRIER), ChatColor.DARK_RED + "Exit", itemLocation);
     }
+
+    /* Deprecated Code END */
 }
