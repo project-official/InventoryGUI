@@ -9,7 +9,7 @@ This is Minecraft paper API plugin for Java.
 
 ## API Feature
 * Simple create inventory gui
-* ~~Modular inventory gui with no event declaration required~~ (Coming soon)
+* Modular inventory gui with no event declaration required
 
 ## API License
 This API uses the GPL-3.0 open source license.
@@ -67,16 +67,29 @@ dependencies {
   compileOnly("com.github.ProjectTL12345:InventoryGUI:VERSION")
 }
 ```
+If you use gradle, do not use implementations! This is plugin.
 
 ## How to use this API dependency
 ### Making inventory gui items
 
 * Java
 ```Java
-public void onExample(Player player) {
-    CreateGUI test = new CreateGUI(27, "Test GUI");
-    test.setItem(new ItemStack(Material.DIAMOND_SWORD), "Test_Item", 1);
-    testGUI.setExitButton(16);
+public void onExample(Player player, Plugin plugin) {
+    CreateGUI test = new CreateGUI(27, Component.text("Test GUI"), plugin);
+    test.setItem(new ItemStack(Material.DIAMOND_SWORD), Component.text("Test_Item"), 1);
+    testGUI.setExit(Component.text("Test GUI"), 16);
+
+    testGUI.addEvent(new AddListener(plugin) {
+        @Override 
+        @EventHandler 
+        public void onEvent(InventoryClickEvent event) {
+            if (event.getView().title().equals(inventoryName)) {
+                if (event.getCurrentItem().getItemMeta().displayName().equals(Component.text("Test_Item"))) {
+                    event.setCancelled(true);
+                }
+            }
+        }
+    });
 
     testGUI.openInventory(player);
 }
@@ -84,37 +97,71 @@ public void onExample(Player player) {
 
 * Groovy
 ```Groovy
-void onExample(Player player) {
-    CreateGUI test = new CreateGUI(27, "Test GUI")
-    test.setItem(new ItemStack(Material.DIAMOND_SWORD), "Test_Item", 1)
-    testGUI.setExitButton(16)
+void onExample(Player player, Plugin plugin) {
+    CreateGUI test = new CreateGUI(27, Component.text("Test GUI"), plugin)
+    test.setItem(new ItemStack(Material.DIAMOND_SWORD), Component.text("Test_Item"), 1)
+    testGUI.setExit(Component.text("Test GUI"), 16)
 
-    testGUI.openInventory(player)
+    testGUI.addEvent(new AddListener(plugin) {
+        @Override
+        @EventHandler
+        void onEvent(InventoryClickEvent event) {
+            if (event.getView().title().equals(inventoryName)) {
+                if (event.getCurrentItem().getItemMeta().displayName().equals(Component.text("Test_Item"))) {
+                    event.setCancelled(true)
+                }
+            }
+        }
+    })
+
+    testGUI.openInventory player
 }
 ```
 
 * Kotlin
 ```Kotlin
-fun onExample(player: Player) {
-    val test = CreateGUI(27, "Test GUI").let { // You can define another variable
-        // Ex) test ->
-        it.setItem(ItemStack(Material.DIAMOND_SWORD), "Test_Item", 1)
-        it.setExitButton(16)
+fun onExample(player: Player, plugin: Plugin) {
+    val test = CreateGUI(27, "Test GUI", plugin).let { gui -> // You can define another variable
+        gui.setItem(ItemStack(Material.DIAMOND_SWORD), Component.text("Test_Item"), 1)
+        gui.setExit(Component.text("Test GUI"), 16)
+
+        gui.addEvent(AddListener(plugin) {
+            @EventHandler
+            override fun onEvent(event: InventoryClickEvent) {
+                if (event.view.title() == inventoryName) {
+                    if (event.currentItem().itemMeta().displayName() == Component.text("Test_Item")) {
+                        event.isCancelled = true
+                    }
+                }
+            }
+        })
         
-        it // You must return it
+        gui // You must return this function
     }
 
-    testGUI.openInventory(player);
+    testGUI.openInventory(player)
 }
 ```
 
 * Scala
 ```Scala
-def onExample(player: Player): Unit = {
-  val test = new CreateGUI(27, "Test GUI")
-  test.setItem(new ItemStack(Material.DIAMOND_SWORD), "Test_Item", 1)
-  testGUI.setExitButton(16)
+def onExample(player: Player, plugin: Plugin): Unit = {
+  val test = new CreateGUI(27, Component.text("Test GUI"), plugin)
+  test.setItem(new ItemStack(Material.DIAMOND_SWORD), Component.text("Test_Item"), 1)
+  testGUI.setExit(Component.text("Test GUI"), 16)
+
+  testGUI.addEvent(new AddListener(plugin) {
+    @EventHandler
+    override def onEvent(event: InventoryClickEvent): Unit = {
+      if (event.getView.title == inventoryName) {
+        if (event.getCurrentItem.getItemMeta.displayName == Component.text("Test_Item")) {
+          event.setCancelled(true)
+        }
+      }
+    }
+  })
 
   testGUI.openInventory(player)
 }
 ```
+P.S. We do not recommend using code styles below InventoryGUI 2.0.0.
