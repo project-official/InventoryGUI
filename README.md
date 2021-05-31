@@ -125,11 +125,11 @@ fun onExample(player: Player, plugin: Plugin) {
         gui.setItem(ItemStack(Material.DIAMOND_SWORD), Component.text("Test_Item"), 1)
         gui.setExit(Component.text("Test GUI"), 16)
 
-        gui.addEvent(AddListener(plugin) {
+        gui.addEvent(object : AddListener(plugin) {
             @EventHandler
             override fun onEvent(event: InventoryClickEvent) {
                 if (event.view.title() == inventoryName) {
-                    if (event.currentItem().itemMeta().displayName() == Component.text("Test_Item")) {
+                    if (event.currentItem?.itemMeta?.displayName() == Component.text("Test_Item")) {
                         event.isCancelled = true
                     }
                 }
