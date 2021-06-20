@@ -1,6 +1,7 @@
 plugins {
     java
     id("com.github.johnrengelman.shadow") version "7.0.0"
+    `maven-publish`
 }
 
 group = properties["apiGroup"]!!
@@ -45,5 +46,14 @@ tasks {
         archiveBaseName.set(project.name)
         archiveVersion.set("")
         archiveClassifier.set("")
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>(project.name) {
+            artifact(tasks["sourceJar"])
+            from(components["java"])
+        }
     }
 }
