@@ -44,7 +44,16 @@ tasks {
 
     shadowJar {
         archiveBaseName.set(project.name)
-        archiveVersion.set("")
+        archiveVersion.set(project.version.toString())
         archiveClassifier.set("")
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>(project.name) {
+            artifact(tasks["sourceJar"])
+            from(components["java"])
+        }
     }
 }
