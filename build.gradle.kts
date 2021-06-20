@@ -48,12 +48,3 @@ tasks {
         archiveClassifier.set("")
     }
 }
-
-publishing {
-    publications {
-        create<MavenPublication>(project.name) {
-            artifact(tasks["sourceJar"])
-            from(components["java"])
-        }
-    }
-}
