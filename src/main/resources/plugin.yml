@@ -1,10 +1,6 @@
 name: ${project.name}
-author: $apiAuthor
+authors:
+  - $apiAuthor
+  - $apiUpdator
 version: $apiVersion
-api-version: 1.16
 main: $apiMain
-
-commands:
-  gui:
-    description: You can see api description or open test gui.
-    usage: /gui test

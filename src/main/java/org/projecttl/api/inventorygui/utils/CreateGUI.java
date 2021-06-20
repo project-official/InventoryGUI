@@ -16,48 +16,69 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
+@Deprecated
 public class CreateGUI {
 
-    private TextComponent name;
-    private Inventory inventory;
-
+    @Deprecated
     private final Plugin plugin;
+    @Deprecated
+    private TextComponent name;
+    @Deprecated
+    private Inventory inventory;
+    @Deprecated
+    private String legacyName;
+
+    /* Start name area */
+
+    @Deprecated
     public CreateGUI(int size, TextComponent name, Plugin plugin) {
         this.name = name;
         this.inventory = Bukkit.createInventory(null, size, name);
         this.plugin = plugin;
     }
 
-    /* Start name area */
 
-    public TextComponent setName(TextComponent inventoryName) {
-        return name = inventoryName;
-    }
-
-    public TextComponent getName() {
-        return name;
+    @Deprecated
+    public CreateGUI(int size, String name, Plugin plugin) {
+        this.legacyName = name;
+        this.inventory = Bukkit.createInventory(null, size, name);
+        this.plugin = plugin;
     }
 
     /* End name area */
 
     /* Start inventory area */
 
-    public Inventory setInventory(Inventory getInventory) {
-        return inventory = getInventory;
+    @Deprecated
+    public TextComponent setName(TextComponent inventoryName) {
+        return name = inventoryName;
     }
 
-    public Inventory getInventory() {
-        return inventory;
+    @Deprecated
+    public TextComponent getName() {
+        return name;
     }
 
     /* End inventory area */
 
     /* Start item Area */
 
+    @Deprecated
+    public Inventory setInventory(Inventory getInventory) {
+        return inventory = getInventory;
+    }
+
+    @Deprecated
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    @Deprecated
     public void setItem(ItemStack item, int itemLocation) {
         inventory.setItem(itemLocation, item);
     }
 
+    @Deprecated
     public void setItem(ItemStack item, TextComponent name, int itemLocation) {
         ItemMeta meta = item.getItemMeta();
         meta.displayName(name);
@@ -66,6 +87,11 @@ public class CreateGUI {
         inventory.setItem(itemLocation, item);
     }
 
+    /* End item Area */
+
+    /* Start event Area*/
+
+    @Deprecated
     public void setItem(ItemStack item, TextComponent name, List<Component> lore, int itemLocation) {
         ItemMeta meta = item.getItemMeta();
         meta.displayName(name);
@@ -75,6 +101,11 @@ public class CreateGUI {
         inventory.setItem(itemLocation, item);
     }
 
+    /* End event Area */
+
+    /* Start Open Inventory */
+
+    @Deprecated
     public void setItem(ItemStack item, TextComponent name, List<Component> lore, int itemLocation, boolean setEnchant) {
         ItemMeta meta = item.getItemMeta();
         meta.displayName(name);
@@ -88,52 +119,38 @@ public class CreateGUI {
         inventory.setItem(itemLocation, item);
     }
 
-    /* End item Area */
+    /* End Open Inventory */
 
-    /* Start event Area*/
-
+    @Deprecated
     public void addEvent(AddListener listener) {
 
     }
 
-    /* End event Area */
+    /* Deprecated Code START */
 
-    /* Start Open Inventory */
-
+    @Deprecated
     public void openInventory(Player player) {
         player.openInventory(inventory);
     }
 
-    /* End Open Inventory */
-
+    @Deprecated
     public void setExit(TextComponent inventoryName, int itemLocation) {
         setItem(new ItemStack(Material.BARRIER), Component.text(ChatColor.DARK_RED + "Exit"), itemLocation);
         addEvent(
-        new AddListener(plugin) {
-            @Override
-            @EventHandler
-            public void onEvent(InventoryClickEvent event) {
-                Player player = (Player) event.getWhoClicked();
+                new AddListener(plugin) {
+                    @Override
+                    @EventHandler
+                    public void onEvent(InventoryClickEvent event) {
+                        Player player = (Player) event.getWhoClicked();
 
-                if (event.getView().title().equals(inventoryName)) {
-                    if (event.getCurrentItem().getItemMeta().displayName().equals(Component.text(ChatColor.DARK_RED + "Exit"))) {
-                        player.closeInventory();
-                        event.setCancelled(true);
+                        if (event.getView().title().equals(inventoryName)) {
+                            if (event.getCurrentItem().getItemMeta().displayName().equals(Component.text(ChatColor.DARK_RED + "Exit"))) {
+                                player.closeInventory();
+                                event.setCancelled(true);
+                            }
+                        }
                     }
-                }
-            }
-        });
-    }
-
-    /* Deprecated Code START */
-
-    @Deprecated private String legacyName;
-
-    @Deprecated
-    public CreateGUI(int size, String name, Plugin plugin) {
-        this.legacyName = name;
-        this.inventory = Bukkit.createInventory(null, size, name);
-        this.plugin = plugin;
+                });
     }
 
     @Deprecated

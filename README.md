@@ -45,10 +45,7 @@ If you did the above, you can use the plugin using this dependency.
 * Gradle (Groovy DSL)
 ```groovy
 repositories {
-  jcenter()
-  maven {
-    url = 'https://jitpack.io'
-  }
+  maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -59,7 +56,6 @@ dependencies {
 * Gradle (Kotlin DSL)
 ```kotlin
 repositories {
-  jcenter()
   maven("https://jitpack.io")
 }
 
@@ -72,96 +68,17 @@ If you use gradle, do not use implementations! This is plugin.
 ## How to use this API dependency
 ### Making inventory gui items
 
-* Java
+* Java (need adventure api or paper)
 ```Java
-public void onExample(Player player, Plugin plugin) {
-    CreateGUI test = new CreateGUI(27, Component.text("Test GUI"), plugin);
-    test.setItem(new ItemStack(Material.DIAMOND_SWORD), Component.text("Test_Item"), 1);
-    testGUI.setExit(Component.text("Test GUI"), 16);
-
-    testGUI.addEvent(new AddListener(plugin) {
-        @Override 
-        @EventHandler 
-        public void onEvent(InventoryClickEvent event) {
-            if (event.getView().title().equals(inventoryName)) {
-                if (event.getCurrentItem().getItemMeta().displayName().equals(Component.text("Test_Item"))) {
-                    event.setCancelled(true);
-                }
-            }
-        }
+public void openInventory(Player player) {
+    InventoryBuilder builder = new InventoryBuilder(Component.text("test inventory"), InventoryType.CHEST_9);
+    builder.setItem(0, new ItemStack(Material.DIAMOND, 10));
+    builder.registerListener(0, event -> {
+    event.setCancelled(true);
+    Bukkit.broadcast(Component.text("Click!!"));
     });
-
-    testGUI.openInventory(player);
-}
-```
-
-* Groovy
-```Groovy
-void onExample(Player player, Plugin plugin) {
-    CreateGUI test = new CreateGUI(27, Component.text("Test GUI"), plugin)
-    test.setItem(new ItemStack(Material.DIAMOND_SWORD), Component.text("Test_Item"), 1)
-    testGUI.setExit(Component.text("Test GUI"), 16)
-
-    testGUI.addEvent(new AddListener(plugin) {
-        @Override
-        @EventHandler
-        void onEvent(InventoryClickEvent event) {
-            if (event.getView().title().equals(inventoryName)) {
-                if (event.getCurrentItem().getItemMeta().displayName().equals(Component.text("Test_Item"))) {
-                    event.setCancelled(true)
-                }
-            }
-        }
-    })
-
-    testGUI.openInventory player
-}
-```
-
-* Kotlin
-```Kotlin
-fun onExample(player: Player, plugin: Plugin) {
-    val test = CreateGUI(27, "Test GUI", plugin).let { gui -> // You can define another variable
-        gui.setItem(ItemStack(Material.DIAMOND_SWORD), Component.text("Test_Item"), 1)
-        gui.setExit(Component.text("Test GUI"), 16)
-
-        gui.addEvent(object : AddListener(plugin) {
-            @EventHandler
-            override fun onEvent(event: InventoryClickEvent) {
-                if (event.view.title() == inventoryName) {
-                    if (event.currentItem?.itemMeta?.displayName() == Component.text("Test_Item")) {
-                        event.isCancelled = true
-                    }
-                }
-            }
-        })
-        
-        gui // You must return this function
-    }
-
-    testGUI.openInventory(player)
-}
-```
-
-* Scala
-```Scala
-def onExample(player: Player, plugin: Plugin): Unit = {
-  val test = new CreateGUI(27, Component.text("Test GUI"), plugin)
-  test.setItem(new ItemStack(Material.DIAMOND_SWORD), Component.text("Test_Item"), 1)
-  testGUI.setExit(Component.text("Test GUI"), 16)
-
-  testGUI.addEvent(new AddListener(plugin) {
-    @EventHandler
-    override def onEvent(event: InventoryClickEvent): Unit = {
-      if (event.getView.title == inventoryName) {
-        if (event.getCurrentItem.getItemMeta.displayName == Component.text("Test_Item")) {
-          event.setCancelled(true)
-        }
-      }
-    }
-  })
-
-  testGUI.openInventory(player)
+    Inventory inventory = builder.build();
+    player.openInventory(inventory);
 }
 ```
 P.S. We do not recommend using code styles below InventoryGUI 2.0.0.
