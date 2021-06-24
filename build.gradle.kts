@@ -20,9 +20,6 @@ dependencies {
     compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
 }
 
-val shade = configurations.create("shade")
-shade.extendsFrom(configurations.implementation.get())
-
 tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
@@ -44,7 +41,7 @@ tasks {
 
     shadowJar {
         archiveBaseName.set(project.name)
-        archiveVersion.set(project.version.toString())
+        archiveVersion.set("")
         archiveClassifier.set("")
     }
 }
