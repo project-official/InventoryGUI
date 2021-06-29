@@ -3,9 +3,11 @@ package org.projecttl.api.inventorygui;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.projecttl.api.inventorygui.listener.InventoryClickListener;
+import org.projecttl.api.inventorygui.listener.InventoryCloseListener;
 import org.projecttl.api.inventorygui.utils.InventoryType;
 
 import java.util.ArrayList;
@@ -14,10 +16,11 @@ import java.util.List;
 import java.util.Map;
 
 public class InventoryBuilder {
-    public static List<InventoryBuilder> builders = new ArrayList<>();
+    static List<InventoryBuilder> builders = new ArrayList<>();
 
     private final InventoryType type;
-    private final Map<Integer, List<InventoryClickListener>> listenerMap = new HashMap<>();
+    private final Map<Integer, List<InventoryClickListener>> clickListenerMap = new HashMap<>();
+    private final List<InventoryCloseListener> closeListeners = new ArrayList<>();
     private final Map<Integer, ItemStack> itemMap = new HashMap<>();
     private Component title;
     private Inventory inventory;
@@ -40,16 +43,20 @@ public class InventoryBuilder {
     }
 
     public int registerListener(int slotNumber, InventoryClickListener listener) {
-        listenerMap.putIfAbsent(slotNumber, new ArrayList<>());
-        List<InventoryClickListener> listeners = listenerMap.get(slotNumber);
+        clickListenerMap.putIfAbsent(slotNumber, new ArrayList<>());
+        List<InventoryClickListener> listeners = clickListenerMap.get(slotNumber);
         listeners.add(listener);
-        listenerMap.put(slotNumber, listeners);
+        clickListenerMap.put(slotNumber, listeners);
         return listener.hashCode();
     }
 
+    public void registerCloseListener(InventoryCloseListener listener) {
+        closeListeners.add(listener);
+    }
+
     public void removeListener(int slotNumber, int listenerId) {
-        listenerMap.putIfAbsent(slotNumber, new ArrayList<>());
-        List<InventoryClickListener> listeners = listenerMap.get(slotNumber);
+        clickListenerMap.putIfAbsent(slotNumber, new ArrayList<>());
+        List<InventoryClickListener> listeners = clickListenerMap.get(slotNumber);
         listeners.removeIf(listener -> listener.hashCode() == listenerId);
     }
 
@@ -81,7 +88,7 @@ public class InventoryBuilder {
                 throw new IllegalStateException("Unexpected value: " + type);
         }
         for (int i = 0; i < inventory.getSize(); i++) {
-            listenerMap.putIfAbsent(i, new ArrayList<>());
+            clickListenerMap.putIfAbsent(i, new ArrayList<>());
         }
         itemMap.forEach(inventory::setItem);
         builders.add(this);
@@ -93,7 +100,11 @@ public class InventoryBuilder {
         return inventory;
     }
 
-    void executeListener(int slot, InventoryClickEvent event) {
-        listenerMap.get(slot).forEach(listener -> listener.click(event));
+    void executeClickListener(int slot, InventoryClickEvent event) {
+        clickListenerMap.get(slot).forEach(listener -> listener.click(event));
+    }
+
+    void executeCloseListener(InventoryCloseEvent event) {
+        closeListeners.forEach(listener -> listener.close(event));
     }
 }
