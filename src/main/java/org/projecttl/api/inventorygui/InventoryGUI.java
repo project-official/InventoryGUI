@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+@Deprecated
 public class InventoryGUI extends JavaPlugin {
     private static InventoryGUI INSTANCE;
 

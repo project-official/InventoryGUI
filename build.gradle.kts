@@ -1,5 +1,6 @@
 plugins {
     java
+    kotlin("jvm") version "1.5.20"
     id("com.github.johnrengelman.shadow") version "7.0.0"
     `maven-publish`
 }
@@ -17,6 +18,7 @@ repositories {
 
 dependencies {
     implementation("net.kyori:adventure-api:4.7.0")
+    implementation(kotlin("stdlib"))
     compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
 }
 
@@ -26,6 +28,10 @@ tasks {
 
         sourceCompatibility = "11"
         targetCompatibility = "11"
+    }
+
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions.jvmTarget = "11"
     }
 
     processResources {

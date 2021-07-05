@@ -4,6 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 
+@Deprecated
 public class Listener implements org.bukkit.event.Listener {
     @EventHandler
     public void inventoryClick(InventoryClickEvent event) {
