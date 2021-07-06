@@ -50,6 +50,11 @@ tasks.getByName<Test>("test") {
 }
 
 tasks {
+    create<Jar>("javadocJar") {
+        archiveClassifier.set("javadoc")
+        from(javadoc)
+    }
+
     create<Jar>("sourceJar") {
         archiveClassifier.set("source")
         from(sourceSets["main"].allSource)
@@ -60,7 +65,10 @@ publishing {
     publications {
         create<MavenPublication>(rootProject.name) {
             from(components["java"])
-            artifact(tasks["sourceJar"])
+            artifacts {
+                tasks["javadocJar"]
+                tasks["sourceJar"]
+            }
 
             repositories {
                 mavenLocal()
@@ -120,5 +128,6 @@ publishing {
 
 signing {
     isRequired = true
+    sign(tasks["javadocJar"], tasks["sourceJar"])
     sign(publishing.publications[rootProject.name])
 }
