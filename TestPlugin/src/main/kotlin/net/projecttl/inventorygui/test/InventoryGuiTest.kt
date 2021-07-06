@@ -1,4 +1,4 @@
-package org.projecttl.inventorygui.test
+package net.projecttl.inventorygui.test
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -8,8 +8,8 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
-import org.projecttl.inventorygui.InventoryType
-import org.projecttl.inventorygui.gui
+import net.projecttl.inventorygui.InventoryType
+import net.projecttl.inventorygui.gui
 
 class InventoryGuiTest : JavaPlugin(), Listener {
 

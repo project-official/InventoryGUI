@@ -1,7 +1,7 @@
 plugins {
 }
 
-group = "org.projecttl"
+group = "net.projecttl"
 version = "1.0-SNAPSHOT"
 
 repositories {
