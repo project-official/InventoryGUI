@@ -1,5 +1,5 @@
 name: InventoryGuiTest
-main: org.projecttl.inventorygui.test.InventoryGuiTest
+main: net.projecttl.inventorygui.test.InventoryGuiTest
 version: 1.0.0
 api-version: 1.17
 
