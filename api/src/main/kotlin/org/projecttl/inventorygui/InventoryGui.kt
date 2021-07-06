@@ -13,6 +13,10 @@ fun JavaPlugin.gui(slotType: InventoryType, title: Component, init: InventoryGui
     return InventoryGuiBuilder(slotType, title, this).apply(init).build()
 }
 
+fun gui(slotType: InventoryType, title: Component, plugin: JavaPlugin, init: InventoryGuiBuilder.() -> Unit) : Inventory {
+    return InventoryGuiBuilder(slotType, title, plugin).apply(init).build()
+}
+
 class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val plugin: JavaPlugin) : Listener {
 
     val slots = hashMapOf<Int, Slot>()
