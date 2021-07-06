@@ -3,13 +3,16 @@ plugins {
     java
 }
 
+var pluginGroup = "net.projecttl"
+var pluginVersion = "4.0.0"
+
 subprojects {
     apply {
         plugin("org.jetbrains.kotlin.jvm")
     }
 
-    group = "org.projecttl"
-    version = "0.0.1-SNAPSHOT"
+    group = pluginGroup
+    version = pluginVersion
 
     repositories {
         mavenCentral()
@@ -24,8 +27,8 @@ subprojects {
     }
 }
 
-group = "org.projecttl"
-version = "1.0-SNAPSHOT"
+group = pluginGroup
+version = pluginVersion
 
 repositories {
     mavenCentral()

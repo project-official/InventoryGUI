@@ -19,10 +19,10 @@ fun gui(slotType: InventoryType, title: Component, plugin: JavaPlugin, init: Inv
 
 class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val plugin: JavaPlugin) : Listener {
 
-    val slots = hashMapOf<Int, Slot>()
+    private val slots = hashMapOf<Int, Slot>()
 
     fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
-        slots.put(slot, Slot(item, handler))
+        slots[slot] = Slot(item, handler)
     }
 
     fun slot(slot: Int, item: ItemStack) {
@@ -31,7 +31,7 @@ class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val
 
     fun build() : Inventory {
         val inv = Bukkit.createInventory(null, slotType.name.split("_")[1].toInt(), title)
-        for(slot in slots.entries) {
+        for (slot in slots.entries) {
             inv.setItem(slot.key, slot.value.stack)
         }
         Bukkit.getServer().pluginManager.registerEvents(this, plugin)
@@ -40,7 +40,6 @@ class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val
 
     @EventHandler
     private fun listener(event: InventoryClickEvent) {
-
         if(event.currentItem != null) {
             for(slot in slots.entries) {
                 if(event.view.title() == this.title && slot.key == event.slot) {
@@ -49,7 +48,6 @@ class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val
                 }
             }
         }
-
     }
 
 }
