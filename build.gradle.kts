@@ -1,6 +1,9 @@
 plugins {
     kotlin("jvm") version "1.5.20"
     java
+
+    `maven-publish`
+    signing
 }
 
 var pluginGroup = "net.projecttl"
@@ -44,4 +47,78 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks {
+    create<Jar>("sourceJar") {
+        archiveClassifier.set("source")
+        from(sourceSets["main"].allSource)
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>(rootProject.name) {
+            from(components["java"])
+            artifact(tasks["sourceJar"])
+
+            repositories {
+                mavenLocal()
+
+                maven {
+                    name = "central"
+
+                    credentials.runCatching {
+                        val nexusUsername = project.properties["nexus_username"].toString()
+                        val nexusPassword = project.properties["nexus_password"].toString()
+
+                        username = nexusUsername
+                        password = nexusPassword
+                    }.onFailure {
+                        logger.warn("Failed to load nexus credentials, Check the gradle.properties")
+                    }
+
+                    url = uri(
+                        if ("SNAPSHOT" in version) {
+                            "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                        } else {
+                            "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                        }
+                    )
+                }
+            }
+
+            pom {
+                name.set(project.name)
+                description.set("Minecraft paper plugin library")
+                url.set("https://github.com/ProjectTL12345/InventoryGUI")
+
+                licenses {
+                    license {
+                        name.set("GNU General Public License version 3.0v")
+                        url.set("https://opensource.org/licenses/GPL-3.0")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("ProjectTL12345")
+                        name.set("Project_TL")
+                        email.set("me@projecttl.net")
+                    }
+                }
+
+                scm {
+                    connection.set("scm:git:git://github.com/ProjectTL12345/InventoryGUI.git")
+                    developerConnection.set("scm:git:ssh://github.com:ProjectTL12345/InventoryGUI.git")
+                    url.set("https://github.com/ProjectTL12345/InventoryGUI")
+                }
+            }
+        }
+    }
+}
+
+signing {
+    isRequired = true
+    sign(publishing.publications[rootProject.name])
 }
