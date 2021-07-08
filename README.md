@@ -7,7 +7,7 @@
 
 ## Library License
 Library used open source license General Public License 3.0
-- License: [InventoryGUI Library]()
+- License: [InventoryGUI Library](https://github.com/ProjectTL12345/InventoryGUI/blob/master/LICENSE)
 
 ## How to use
 ### Write build script
@@ -56,4 +56,4 @@ dependencies {
 ```
 
 ### Writing code
-Example is here []()
+Example is here [Follow](https://github.com/ProjectTL12345/InventoryGUI/blob/master/TestPlugin/src/main/kotlin/net/projecttl/inventorygui/test/InventoryGuiTest.kt)
