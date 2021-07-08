@@ -3,19 +3,16 @@ plugins {
     java
 
     `maven-publish`
-    signing
+    // signing
 }
-
-var pluginGroup = "net.projecttl"
-var pluginVersion = "4.0.0"
 
 subprojects {
     apply {
         plugin("org.jetbrains.kotlin.jvm")
     }
 
-    group = pluginGroup
-    version = pluginVersion
+    group = properties["pluginGroup"]!!
+    version = properties["pluginVersion"]!!
 
     repositories {
         mavenCentral()
@@ -30,8 +27,8 @@ subprojects {
     }
 }
 
-group = pluginGroup
-version = pluginVersion
+group = properties["pluginGroup"]!!
+version = properties["pluginVersion"]!!
 
 repositories {
     mavenCentral()
@@ -70,6 +67,7 @@ publishing {
                 tasks["sourceJar"]
             }
 
+            /*
             repositories {
                 mavenLocal()
 
@@ -122,12 +120,15 @@ publishing {
                     url.set("https://github.com/ProjectTL12345/InventoryGUI")
                 }
             }
+             */
         }
     }
 }
 
+/*
 signing {
     isRequired = true
     sign(tasks["javadocJar"], tasks["sourceJar"])
     sign(publishing.publications[rootProject.name])
 }
+ */
