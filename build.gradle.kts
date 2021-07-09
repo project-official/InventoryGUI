@@ -47,10 +47,12 @@ tasks.getByName<Test>("test") {
 }
 
 tasks {
+    /*
     create<Jar>("javadocJar") {
         archiveClassifier.set("javadoc")
         from(javadoc)
     }
+     */
 
     create<Jar>("sourceJar") {
         archiveClassifier.set("source")
@@ -63,7 +65,7 @@ publishing {
         create<MavenPublication>(rootProject.name) {
             from(components["java"])
             artifacts {
-                tasks["javadocJar"]
+                // tasks["javadocJar"]
                 tasks["sourceJar"]
             }
 
