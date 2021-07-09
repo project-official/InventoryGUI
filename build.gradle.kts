@@ -1,9 +1,9 @@
 plugins {
     kotlin("jvm") version "1.5.20"
     java
-
+    `java-library`
     `maven-publish`
-    // signing
+    signing
 }
 
 subprojects {
@@ -11,8 +11,8 @@ subprojects {
         plugin("org.jetbrains.kotlin.jvm")
     }
 
-    group = properties["pluginGroup"]!!
-    version = properties["pluginVersion"]!!
+    group = rootProject.group
+    version = rootProject.version
 
     repositories {
         mavenCentral()
@@ -46,91 +46,66 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
-tasks {
-    /*
-    create<Jar>("javadocJar") {
-        archiveClassifier.set("javadoc")
-        from(javadoc)
-    }
-     */
+tasks.register<Jar>("sourceJar") {
+    archiveClassifier.set("source")
+    from(sourceSets["main"].allSource)
+}
 
-    create<Jar>("sourceJar") {
-        archiveClassifier.set("source")
-        from(sourceSets["main"].allSource)
-    }
+tasks.register<Jar>("javadocJar") {
+    archiveClassifier.set("javadoc")
+    from(tasks.javadoc.get().destinationDir)
 }
 
 publishing {
     publications {
         create<MavenPublication>(rootProject.name) {
             from(components["java"])
-            artifacts {
-                // tasks["javadocJar"]
-                tasks["sourceJar"]
-            }
+            artifact(tasks["sourceJar"])
+            artifact(tasks["javadocJar"])
 
-            /*
+            val mavenUploadUser: String by project
+            val mavenUploadPwd: String by project
+
             repositories {
-                mavenLocal()
-
                 maven {
-                    name = "central"
+                    name = "MavenCentral"
+                    val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+                    val snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+                    url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
 
-                    credentials.runCatching {
-                        val nexusUsername = project.properties["nexus_username"].toString()
-                        val nexusPassword = project.properties["nexus_password"].toString()
-
-                        username = nexusUsername
-                        password = nexusPassword
-                    }.onFailure {
-                        logger.warn("Failed to load nexus credentials, Check the gradle.properties")
+                    credentials {
+                        username = mavenUploadUser
+                        password = mavenUploadPwd
                     }
-
-                    url = uri(
-                        if ("SNAPSHOT" in version) {
-                            "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-                        } else {
-                            "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                        }
-                    )
                 }
             }
 
             pom {
-                name.set(project.name)
-                description.set("Minecraft paper plugin library")
-                url.set("https://github.com/ProjectTL12345/InventoryGUI")
-
-                licenses {
-                    license {
-                        name.set("GNU General Public License version 3.0v")
-                        url.set("https://opensource.org/licenses/GPL-3.0")
-                    }
-                }
+                name.set(rootProject.name)
+                description.set("")
+                url.set("https://github.com/ProjectTL12345/InventoryGUI/")
 
                 developers {
                     developer {
-                        id.set("ProjectTL12345")
-                        name.set("Project_TL")
+                        name.set("ProjectTL12345")
                         email.set("me@projecttl.net")
                     }
                 }
 
                 scm {
-                    connection.set("scm:git:git://github.com/ProjectTL12345/InventoryGUI.git")
-                    developerConnection.set("scm:git:ssh://github.com:ProjectTL12345/InventoryGUI.git")
-                    url.set("https://github.com/ProjectTL12345/InventoryGUI")
+                    connection.set("scm:git:https://github.com/ProjectTL12345/InventoryGUI.git")
+                    developerConnection.set("scm:git:https://github.com/ProjectTL12345/InventoryGUI.git")
+                    url.set("https://github.com/ProjectTL12345/")
                 }
+
             }
-             */
         }
     }
 }
 
-/*
 signing {
-    isRequired = true
-    sign(tasks["javadocJar"], tasks["sourceJar"])
-    sign(publishing.publications[rootProject.name])
+    val pgpSigningKey: String? by project
+    val pgpSigningPwd: String? by project
+    useInMemoryPgpKeys(pgpSigningKey, pgpSigningPwd)
+    sign(publishing.publications["mavenJava"])
 }
- */
