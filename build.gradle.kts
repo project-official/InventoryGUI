@@ -23,7 +23,7 @@ subprojects {
 
     dependencies {
         implementation(kotlin("stdlib"))
-        compileOnly("io.papermc.paper:paper-api:1.17-R0.1-SNAPSHOT")
+        compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
     }
 }
 
@@ -37,7 +37,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    compileOnly("io.papermc.paper:paper-api:1.17-R0.1-SNAPSHOT")
+    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
@@ -51,16 +51,19 @@ tasks.register<Jar>("sourceJar") {
     from(sourceSets["main"].allSource)
 }
 
+/*
 tasks.register<Jar>("javadocJar") {
     archiveClassifier.set("javadoc")
     from(tasks.javadoc.get().destinationDir)
 }
+*/
 
 publishing {
     publications {
         create<MavenPublication>(rootProject.name) {
             from(components["java"])
             artifact(tasks["sourceJar"])
+            /*
             artifact(tasks["javadocJar"])
 
             val mavenUploadUser: String by project
@@ -99,13 +102,17 @@ publishing {
                 }
 
             }
+
+             */
         }
     }
 }
 
+/*
 signing {
     val pgpSigningKey: String? by project
     val pgpSigningPwd: String? by project
     useInMemoryPgpKeys(pgpSigningKey, pgpSigningPwd)
     sign(publishing.publications["mavenJava"])
 }
+ */
