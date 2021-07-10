@@ -56,4 +56,18 @@ dependencies {
 ```
 
 ### Writing code
-Example is here [Follow](https://github.com/ProjectTL12345/InventoryGUI/blob/master/TestPlugin/src/main/kotlin/net/projecttl/inventorygui/test/InventoryGuiTest.kt)
+```kotlin
+    fun function(player: Player) {
+        player.openInventory(
+            gui(InventoryType.CHEST_54, Component.text("TEST")) {
+                // dummy slot
+                slot(0, ItemStack(Material.STICK))
+
+                slot(1, ItemStack(Material.DEBUG_STICK)) {
+                    view.player.sendMessage(Component.text("doing the job", NamedTextColor.GREEN))
+                    view.close()
+                }
+            }
+        )
+    }
+```

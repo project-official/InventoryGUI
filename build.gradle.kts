@@ -1,30 +1,9 @@
 plugins {
     kotlin("jvm") version "1.5.20"
-    java
-    `java-library`
     `maven-publish`
-    signing
-}
 
-subprojects {
-    apply {
-        plugin("org.jetbrains.kotlin.jvm")
-    }
-
-    group = rootProject.group
-    version = rootProject.version
-
-    repositories {
-        mavenCentral()
-        maven("https://papermc.io/repo/repository/maven-public/")
-    }
-
-    val implementation by configurations
-
-    dependencies {
-        implementation(kotlin("stdlib"))
-        compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
-    }
+    //`java-library`
+    //signing
 }
 
 group = properties["pluginGroup"]!!
@@ -42,13 +21,22 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
-}
+val shade = configurations.create("shade")
+shade.extendsFrom(configurations.implementation.get())
 
-tasks.register<Jar>("sourceJar") {
-    archiveClassifier.set("source")
-    from(sourceSets["main"].allSource)
+tasks {
+    getByName<Test>("test") {
+        useJUnitPlatform()
+    }
+
+    create<Jar>("sourceJar") {
+        archiveClassifier.set("source")
+        from(sourceSets["main"].allSource)
+    }
+
+    jar {
+        from(shade.map { if (it.isDirectory) it else zipTree(it) })
+    }
 }
 
 /*
@@ -102,8 +90,7 @@ publishing {
                 }
 
             }
-
-             */
+            */
         }
     }
 }
