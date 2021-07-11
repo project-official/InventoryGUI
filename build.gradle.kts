@@ -33,7 +33,7 @@ tasks {
     shadowJar {
         archiveBaseName.set(rootProject.name)
         archiveClassifier.set("")
-        archiveVersion.set("")
+        archiveVersion.set(rootProject.version.toString())
     }
 }
 
