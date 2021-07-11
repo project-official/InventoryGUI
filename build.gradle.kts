@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm") version "1.5.20"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
+
     `maven-publish`
 }
 
@@ -18,9 +20,6 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
-val shade = configurations.create("shade")
-shade.extendsFrom(configurations.implementation.get())
-
 tasks {
     getByName<Test>("test") {
         useJUnitPlatform()
@@ -31,8 +30,10 @@ tasks {
         from(sourceSets["main"].allSource)
     }
 
-    jar {
-        from(shade.map { if (it.isDirectory) it else zipTree(it) })
+    shadowJar {
+        archiveBaseName.set(rootProject.name)
+        archiveClassifier.set("")
+        archiveVersion.set("")
     }
 }
 
