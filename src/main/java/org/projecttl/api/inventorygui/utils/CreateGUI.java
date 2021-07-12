@@ -16,7 +16,6 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
-@Deprecated
 public class CreateGUI {
 
     @Deprecated

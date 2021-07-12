@@ -4,7 +4,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.plugin.Plugin;
 
-@Deprecated
 public abstract class AddListener implements Listener {
     @Deprecated
     public AddListener(Plugin plugin) {
