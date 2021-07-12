@@ -1,5 +1,7 @@
 plugins {
     `maven-publish`
+    `java-library`
+
     signing
 }
 
