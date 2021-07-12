@@ -79,6 +79,8 @@ publishing {
 signing {
     val pgpSigningKey: String? by project
     val pgpSigningPwd: String? by project
+
     useInMemoryPgpKeys(pgpSigningKey, pgpSigningPwd)
     sign(publishing.publications[rootProject.name])
+    sign(tasks["sourceJar"], tasks["javadocJar"])
 }
