@@ -1,4 +1,4 @@
-package net.projecttl.inventorygui
+package net.projecttl.inventorygui.utils
 
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack

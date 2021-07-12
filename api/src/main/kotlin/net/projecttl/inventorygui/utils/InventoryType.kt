@@ -1,4 +1,4 @@
-package net.projecttl.inventorygui
+package net.projecttl.inventorygui.utils
 
 enum class InventoryType {
 

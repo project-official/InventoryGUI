@@ -1,6 +1,8 @@
 package net.projecttl.inventorygui
 
 import net.kyori.adventure.text.Component
+import net.projecttl.inventorygui.utils.InventoryType
+import net.projecttl.inventorygui.utils.Slot
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

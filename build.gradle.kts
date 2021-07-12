@@ -1,12 +1,28 @@
 plugins {
     kotlin("jvm") version "1.5.20"
-    id("com.github.johnrengelman.shadow") version "7.0.0"
-
     `maven-publish`
 }
 
 group = properties["pluginGroup"]!!
 version = properties["pluginVersion"]!!
+
+subprojects {
+    apply {
+        plugin("org.jetbrains.kotlin.jvm")
+    }
+    group = rootProject.group
+    version = rootProject.version
+
+    repositories {
+        mavenCentral()
+        maven("https://papermc.io/repo/repository/maven-public/")
+    }
+
+    dependencies {
+        implementation(kotlin("stdlib"))
+        compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+    }
+}
 
 repositories {
     mavenCentral()
@@ -23,25 +39,5 @@ dependencies {
 tasks {
     getByName<Test>("test") {
         useJUnitPlatform()
-    }
-
-    create<Jar>("sourceJar") {
-        archiveClassifier.set("source")
-        from(sourceSets["main"].allSource)
-    }
-
-    shadowJar {
-        archiveBaseName.set(rootProject.name)
-        archiveClassifier.set("")
-        archiveVersion.set(rootProject.version.toString())
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>(rootProject.name) {
-            from(components["java"])
-            artifact(tasks["sourceJar"])
-        }
     }
 }
