@@ -6,24 +6,6 @@ plugins {
 group = properties["pluginGroup"]!!
 version = properties["pluginVersion"]!!
 
-subprojects {
-    apply {
-        plugin("org.jetbrains.kotlin.jvm")
-    }
-    group = rootProject.group
-    version = rootProject.version
-
-    repositories {
-        mavenCentral()
-        maven("https://papermc.io/repo/repository/maven-public/")
-    }
-
-    dependencies {
-        implementation(kotlin("stdlib"))
-        compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
-    }
-}
-
 repositories {
     mavenCentral()
     maven("https://papermc.io/repo/repository/maven-public/")
@@ -36,8 +18,29 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
+val shade = configurations.create("shade")
+shade.extendsFrom(configurations.implementation.get())
+
 tasks {
     getByName<Test>("test") {
         useJUnitPlatform()
+    }
+
+    create<Jar>("sourceJar") {
+        archiveClassifier.set("source")
+        from(sourceSets["main"].allSource)
+    }
+
+    jar {
+        from(shade.map { if (it.isDirectory) it else zipTree(it) })
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>(rootProject.name) {
+            from(components["java"])
+            artifact(tasks["sourceJar"])
+        }
     }
 }
