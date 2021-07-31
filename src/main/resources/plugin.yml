@@ -1,6 +1,0 @@
-name: ${project.name}
-authors:
-  - $apiAuthor
-  - $apiUpdator
-version: $apiVersion
-main: $apiMain

@@ -1,62 +1,31 @@
 plugins {
     java
     kotlin("jvm") version "1.5.20"
-    id("com.github.johnrengelman.shadow") version "7.0.0"
     `maven-publish`
 }
 
 group = properties["apiGroup"]!!
 version = properties["apiVersion"]!!
 
-repositories {
-    mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/")
-    maven(url = "https://oss.sonatype.org/content/repositories/snapshots/") {
-        name = "sonatype-oss-snapshots"
+allprojects {
+    repositories {
+        mavenCentral()
     }
 }
 
-dependencies {
-    implementation("net.kyori:adventure-api:4.7.0")
-    implementation(kotlin("stdlib"))
-    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
-}
+subprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
 
-tasks {
-    withType<JavaCompile> {
-        options.encoding = "UTF-8"
-
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
-    }
-
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "11"
-    }
-
-    processResources {
-        filesMatching("*.yml") {
-            expand(project.properties)
+    repositories {
+        maven("https://papermc.io/repo/repository/maven-public/")
+        maven(url = "https://oss.sonatype.org/content/repositories/snapshots/") {
+            name = "sonatype-oss-snapshots"
         }
     }
 
-    create<Jar>("sourceJar") {
-        archiveClassifier.set("source")
-        from(sourceSets["main"].allSource)
-    }
-
-    shadowJar {
-        archiveClassifier.set(project.version.toString())
-        archiveBaseName.set(project.name)
-        archiveVersion.set("")
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>(project.name) {
-            artifact(tasks["sourceJar"])
-            from(components["java"])
-        }
+    dependencies {
+        implementation("net.kyori:adventure-api:4.7.0")
+        implementation(kotlin("stdlib"))
+        compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
     }
 }
