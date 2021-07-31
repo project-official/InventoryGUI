@@ -16,13 +16,7 @@ This API uses the GPL-3.0 open source license.
 * License: [InventoryGUI License](https://github.com/ProjectTL12345/InventoryGUI/blob/master/LICENSE)
 
 ## How to use this API in server
-This is a dependency library, you must add this API to use the plugin using this dependency library.
-To use a plugin using this dependency library, you need to do the following:
-
-* Step 1: Please go to your server.
-* Step 2: Please add this dependency library to your plugins folder.
-
-If you did the above, you can use the plugin using this dependency.
+You do not need to put this API in the server, and use it after calling it through Implementation in your plugin.
 
 ## API Build
 
