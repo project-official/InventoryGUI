@@ -1,5 +1,5 @@
 # InventoryGUI
-This is Minecraft paper API plugin for Java.
+This is Minecraft paper gui API.
 
 * [API Feature](https://github.com/ProjectTL12345/InventoryGUI#api-feature)
 * [API License](https://github.com/ProjectTL12345/InventoryGUI#api-license)
@@ -8,7 +8,7 @@ This is Minecraft paper API plugin for Java.
 * [How to use this API dependency](https://github.com/ProjectTL12345/InventoryGUI#how-to-use-this-api-dependency)
 
 ## API Feature
-* Simple create inventory gui
+* DSL style code
 * Modular inventory gui with no event declaration required
 
 ## API License
@@ -66,19 +66,17 @@ dependencies {
 If you use gradle, do not use implementations! This is plugin.
 
 ## How to use this API dependency
-### Making inventory gui items
-
-* Java (need adventure api or paper)
-```Java
-public void openInventory(Player player) {
-    InventoryBuilder builder = new InventoryBuilder(Component.text("test inventory"), InventoryType.CHEST_9);
-    builder.setItem(0, new ItemStack(Material.DIAMOND, 10));
-    builder.registerListener(0, event -> {
-    event.setCancelled(true);
-    Bukkit.broadcast(Component.text("Click!!"));
-    });
-    Inventory inventory = builder.build();
-    player.openInventory(inventory);
+This api must use kotlin only.
+```Kotlin
+class TestGui(val plugin: Plugin) {
+  fun inventory(player: Player) {
+    player.openInventory(
+    plugin.gui(InventoryType.CHEST_27, Component.text("TestGUI")) {
+      slot(0, ItemStack(Material.GRASS_BLOCK)) {
+        player.sendMessage("Hello!")
+      }
+    })
+  }
 }
 ```
-P.S. We do not recommend using code styles below InventoryGUI 2.0.0.
+P.S. We do not recommend using code styles below InventoryGUI 3.1.1.
