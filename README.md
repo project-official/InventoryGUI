@@ -65,11 +65,12 @@ This api must use kotlin only.
 class TestGui(val plugin: Plugin) {
   fun inventory(player: Player) {
     player.openInventory(
-    plugin.gui(InventoryType.CHEST_27, Component.text("TestGUI")) {
-      slot(0, ItemStack(Material.GRASS_BLOCK)) {
-        player.sendMessage("Hello!")
+      plugin.gui(InventoryType.CHEST_27, Component.text("TestGUI")) {
+        slot(0, ItemStack(Material.GRASS_BLOCK)) {
+          player.sendMessage("Hello!")
+        }
       }
-    })
+    )
   }
 }
 ```
