@@ -16,6 +16,11 @@ tasks {
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
     }
+
+    create<Jar>("javadocJar") {
+        archiveClassifier.set("javadoc")
+        from(javadoc)
+    }
 }
 
 publishing {
