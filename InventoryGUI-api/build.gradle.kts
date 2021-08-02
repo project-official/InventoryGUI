@@ -52,6 +52,8 @@ publishing {
             artifact(tasks["sourcesJar"])
             artifact(tasks["javadocJar"])
 
+
+
             pom {
                 name.set(rootProject.name)
                 description.set("This is minecraft gui library")
@@ -84,5 +86,6 @@ signing {
     val PGP_SIGNING_KEY: String? by project
     val PGP_SIGNING_PASSWORD: String? by project
     useInMemoryPgpKeys(PGP_SIGNING_KEY, PGP_SIGNING_PASSWORD)
+    sign(tasks["sourcesJar"], tasks["javadocJar"])
     sign(publishing.publications["mavenJava"])
 }
