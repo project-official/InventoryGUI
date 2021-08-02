@@ -13,11 +13,6 @@ tasks {
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
     }
-
-    register<Jar>("javadocJar") {
-        archiveClassifier.set("javadoc")
-        from(javadoc)
-    }
 }
 
 // Add publish code with jitpack
@@ -50,9 +45,6 @@ publishing {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
             artifact(tasks["sourcesJar"])
-            artifact(tasks["javadocJar"])
-
-
 
             pom {
                 name.set(rootProject.name)
@@ -83,6 +75,6 @@ publishing {
 }
 
 signing {
-    sign(tasks["sourcesJar"], tasks["javadocJar"])
+    sign(tasks["sourcesJar"])
     sign(publishing.publications["mavenJava"])
 }
