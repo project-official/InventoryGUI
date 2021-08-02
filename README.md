@@ -1,24 +1,20 @@
 # InventoryGUI
-This is Minecraft paper gui API.
+This is Minecraft paper gui library.
 
-* [API Feature](https://github.com/ProjectTL12345/InventoryGUI#api-feature)
-* [API License](https://github.com/ProjectTL12345/InventoryGUI#api-license)
-* [How to use this API in server](https://github.com/ProjectTL12345/InventoryGUI#how-to-use-this-api-in-server)
-* [API Build](https://github.com/ProjectTL12345/InventoryGUI#api-build)
-* [How to use this API dependency](https://github.com/ProjectTL12345/InventoryGUI#how-to-use-this-api-dependency)
+* [Library Feature](https://github.com/ProjectTL12345/InventoryGUI#library-feature)
+* [Library License](https://github.com/ProjectTL12345/InventoryGUI#library-license)
+* [API Build](https://github.com/ProjectTL12345/InventoryGUI#import-library)
+* [How to use this Library](https://github.com/ProjectTL12345/InventoryGUI#how-to-use-this-library)
 
-## API Feature
+## Library Feature
 * DSL style code
 * Modular inventory gui with no event declaration required
 
-## API License
+## Library License
 This API uses the GPL-3.0 open source license.
 * License: [InventoryGUI License](https://github.com/ProjectTL12345/InventoryGUI/blob/master/LICENSE)
 
-## How to use this API in server
-You do not need to put this API in the server, and use it after calling it through Implementation in your plugin.
-
-## API Build
+## Import Library
 
 * Maven (legacy)
 ```XML
@@ -100,7 +96,7 @@ dependencies {
 ```
 If you use gradle, do not use implementations! This is plugin.
 
-## How to use this API dependency
+## How to use this Library
 This api must use kotlin only.
 ```Kotlin
 class TestGui(val plugin: Plugin) {
