@@ -68,8 +68,5 @@ publishing {
 }
 
 signing {
-    val PGP_SIGNING_KEY: String? by project
-    val PGP_SIGNING_PASSWORD: String? by project
-    useInMemoryPgpKeys(PGP_SIGNING_KEY, PGP_SIGNING_PASSWORD)
     sign(publishing.publications["${rootProject.name}-api"])
 }

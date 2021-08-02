@@ -4,8 +4,8 @@ plugins {
     `maven-publish`
 }
 
-group = properties["apiGroup"]!!
-version = properties["apiVersion"]!!
+group = "net.projecttl"
+version = "4.0.0"
 
 allprojects {
     repositories {
