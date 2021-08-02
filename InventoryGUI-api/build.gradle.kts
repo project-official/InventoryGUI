@@ -19,7 +19,8 @@ tasks {
 
     create<Jar>("javadocJar") {
         archiveClassifier.set("javadoc")
-        from(javadoc)
+        dependsOn("dokkaHtml")
+        from("$buildDir/dokka/html")
     }
 }
 
@@ -28,6 +29,7 @@ publishing {
         create<MavenPublication>("${rootProject.name}-api") {
             from(components["java"])
             artifact(tasks["sourcesJar"])
+            artifact(tasks["javadocJar"])
 
             repositories {
                 maven {

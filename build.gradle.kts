@@ -1,6 +1,7 @@
 plugins {
     java
-    kotlin("jvm") version "1.5.20"
+    kotlin("jvm") version "1.5.21"
+    id("org.jetbrains.dokka") version "1.5.0"
     `maven-publish`
 }
 
@@ -15,6 +16,7 @@ allprojects {
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin= "org.jetbrains.dokka")
 
     repositories {
         maven("https://papermc.io/repo/repository/maven-public/")
