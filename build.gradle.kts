@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "net.projecttl"
-version = "4.0.0"
+version = "4.0.1"
 
 allprojects {
     repositories {
@@ -28,6 +28,6 @@ subprojects {
     dependencies {
         implementation("net.kyori:adventure-api:4.7.0")
         implementation(kotlin("stdlib"))
-        compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
     }
 }

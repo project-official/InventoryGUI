@@ -20,7 +20,7 @@ You do not need to put this API in the server, and use it after calling it throu
 
 ## API Build
 
-* Maven
+* Maven (legacy)
 ```XML
 <repositories>
   <repository>
@@ -36,7 +36,26 @@ You do not need to put this API in the server, and use it after calling it throu
 </dependency>
 ```
 
-* Gradle (Groovy DSL)
+* Maven (latest)
+```XML
+<repositories>
+    <repository>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <id>central</id>
+        <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>net.projecttl</groupId>
+    <artifactId>InventoryGUI-api</artifactId>
+    <version>4.0.0</version>
+</dependency>
+```
+
+* Gradle (Groovy DSL legacy)
 ```groovy
 repositories {
   maven { url 'https://jitpack.io' }
@@ -47,7 +66,18 @@ dependencies {
 }
 ```
 
-* Gradle (Kotlin DSL)
+* Gradle (Groovy DSL latest)
+```groovy
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compileOnly 'net.projecttl:InventoryGUI-api:VERSION'
+}
+```
+
+* Gradle (Kotlin DSL legacy)
 ```kotlin
 repositories {
   maven("https://jitpack.io")
@@ -55,6 +85,17 @@ repositories {
 
 dependencies {
   compileOnly("com.github.ProjectTL12345:InventoryGUI:VERSION")
+}
+```
+
+* Gradle (Kotlin DSL latest)
+```kotlin
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compileOnly("net.projecttl:InventoryGUI-api:VERSION")
 }
 ```
 If you use gradle, do not use implementations! This is plugin.
@@ -74,4 +115,4 @@ class TestGui(val plugin: Plugin) {
   }
 }
 ```
-P.S. We do not recommend using code styles below InventoryGUI 3.1.1.
+P.S. We do not recommend using code styles below InventoryGUI 3.1.2.
