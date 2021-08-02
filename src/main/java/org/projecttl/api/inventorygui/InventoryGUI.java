@@ -17,8 +17,6 @@ public class InventoryGUI extends JavaPlugin {
         INSTANCE = this;
         getLogger().info("<InventoryGUI> " + ChatColor.GREEN + "API has successful enabled.");
 
-        /*Objects.requireNonNull(getCommand("gui")).setExecutor(new ConfigInventoryAPI());
-        Objects.requireNonNull(getCommand("gui")).setTabCompleter(new ConfigInventoryAPI());*/
         Bukkit.getPluginManager().registerEvents(new Listener(), this);
     }
 

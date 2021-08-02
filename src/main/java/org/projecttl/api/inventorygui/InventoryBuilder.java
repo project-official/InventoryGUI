@@ -1,6 +1,5 @@
 package org.projecttl.api.inventorygui;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -22,19 +21,19 @@ public class InventoryBuilder {
     private final Map<Integer, List<InventoryClickListener>> clickListenerMap = new HashMap<>();
     private final List<InventoryCloseListener> closeListeners = new ArrayList<>();
     private final Map<Integer, ItemStack> itemMap = new HashMap<>();
-    private Component title;
+    private String title;
     private Inventory inventory;
 
-    public InventoryBuilder(Component title, InventoryType type) {
+    public InventoryBuilder(String title, InventoryType type) {
         this.title = title;
         this.type = type;
     }
 
-    public Component getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(Component title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -64,25 +63,25 @@ public class InventoryBuilder {
         Inventory inventory;
         switch (type) {
             case CHEST_9:
-                inventory = Bukkit.createInventory(null, 9);
+                inventory = Bukkit.createInventory(null, 9, getTitle());
                 break;
             case CHEST_18:
-                inventory = Bukkit.createInventory(null, 18);
+                inventory = Bukkit.createInventory(null, 18, getTitle());
                 break;
             case CHEST_27:
-                inventory = Bukkit.createInventory(null, 27);
+                inventory = Bukkit.createInventory(null, 27, getTitle());
                 break;
             case CHEST_36:
-                inventory = Bukkit.createInventory(null, 36);
+                inventory = Bukkit.createInventory(null, 36, getTitle());
                 break;
             case CHEST_45:
-                inventory = Bukkit.createInventory(null, 45);
+                inventory = Bukkit.createInventory(null, 45, getTitle());
                 break;
             case CHEST_54:
-                inventory = Bukkit.createInventory(null, 54);
+                inventory = Bukkit.createInventory(null, 54, getTitle());
                 break;
             case HOPPER:
-                inventory = Bukkit.createInventory(null, org.bukkit.event.inventory.InventoryType.HOPPER);
+                inventory = Bukkit.createInventory(null, org.bukkit.event.inventory.InventoryType.HOPPER, getTitle());
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + type);
