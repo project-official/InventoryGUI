@@ -1,3 +1,4 @@
 /.gradle/
 /.idea/
 /build/
+/InventoryGUI-api/*.gpg
