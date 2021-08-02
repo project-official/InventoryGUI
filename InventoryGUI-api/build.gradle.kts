@@ -9,19 +9,9 @@ group = rootProject.group
 version = rootProject.version
 
 tasks {
-    register<Jar>("sourcesJar") {
+    create<Jar>("sourcesJar") {
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
-    }
-}
-
-// Add publish code with jitpack
-publishing {
-    publications {
-        create<MavenPublication>(project.name) {
-            artifact(tasks["sourcesJar"])
-            from(components["java"])
-        }
     }
 }
 
@@ -42,7 +32,7 @@ publishing {
         }
     }
     publications {
-        create<MavenPublication>("mavenJava") {
+        create<MavenPublication>(rootProject.name) {
             from(components["java"])
             artifact(tasks["sourcesJar"])
 
@@ -75,6 +65,7 @@ publishing {
 }
 
 signing {
+    isRequired = true
     sign(tasks["sourcesJar"])
-    sign(publishing.publications["mavenJava"])
+    sign(publishing.publications[rootProject.name])
 }
