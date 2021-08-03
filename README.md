@@ -16,22 +16,6 @@ This API uses the GPL-3.0 open source license.
 
 ## Import Library
 
-* Maven (legacy)
-```XML
-<repositories>
-  <repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
-  </repository>
-</repositories>
-
-<dependency>
-  <groupId>com.github.ProjectTL12345</groupId>
-  <artifactId>InventoryGUI</artifactId>
-  <version>VERSION</version>
-</dependency>
-```
-
 * Maven (latest)
 ```XML
 <repositories>
@@ -51,17 +35,6 @@ This API uses the GPL-3.0 open source license.
 </dependency>
 ```
 
-* Gradle (Groovy DSL legacy)
-```groovy
-repositories {
-  maven { url 'https://jitpack.io' }
-}
-
-dependencies {
-  compileOnly 'com.github.ProjectTL12345:InventoryGUI:VERSION'
-}
-```
-
 * Gradle (Groovy DSL latest)
 ```groovy
 repositories {
@@ -70,17 +43,6 @@ repositories {
 
 dependencies {
   compileOnly 'net.projecttl:InventoryGUI-api:VERSION'
-}
-```
-
-* Gradle (Kotlin DSL legacy)
-```kotlin
-repositories {
-  maven("https://jitpack.io")
-}
-
-dependencies {
-  compileOnly("com.github.ProjectTL12345:InventoryGUI:VERSION")
 }
 ```
 
@@ -120,3 +82,44 @@ class TestGui(val plugin: Plugin) {
 }
 ```
 P.S. We do not recommend using code styles below InventoryGUI 3.1.2.
+
+## Legacy imports
+
+* Maven (legacy)
+```XML
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+
+<dependency>
+  <groupId>com.github.ProjectTL12345</groupId>
+  <artifactId>InventoryGUI</artifactId>
+  <version>VERSION</version>
+</dependency>
+```
+
+
+* Gradle (Kotlin DSL legacy)
+```kotlin
+repositories {
+  maven("https://jitpack.io")
+}
+
+dependencies {
+  compileOnly("com.github.ProjectTL12345:InventoryGUI:VERSION")
+}
+```
+
+* Gradle (Groovy DSL legacy)
+```groovy
+repositories {
+  maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+  compileOnly 'com.github.ProjectTL12345:InventoryGUI:VERSION'
+}
+```
