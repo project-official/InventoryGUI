@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "net.projecttl"
-version = "4.0.1"
+version = "4.0.1-SNAPSHOT"
 
 allprojects {
     repositories {
@@ -20,14 +20,10 @@ subprojects {
 
     repositories {
         maven("https://papermc.io/repo/repository/maven-public/")
-        maven(url = "https://oss.sonatype.org/content/repositories/snapshots/") {
-            name = "sonatype-oss-snapshots"
-        }
     }
 
     dependencies {
-        implementation("net.kyori:adventure-api:4.7.0")
-        implementation(kotlin("stdlib"))
-        compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
+        implementation(kotlin("stdlib-jdk8"))
+        compileOnly("org.github.paperspigot:paperspigot-api:1.8.8-R0.1-SNAPSHOT")
     }
 }
