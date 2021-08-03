@@ -94,7 +94,15 @@ dependencies {
   compileOnly("net.projecttl:InventoryGUI-api:VERSION")
 }
 ```
-If you use gradle, do not use implementations! This is plugin.
+Do not shade it! This can installed without shade (latest only feature)!
+
+* Plugin.YML (latest only)
+```
+# ...
+libraries:
+  - net.projecttl.InventoryGUI-api:VERSION
+# ...
+```
 
 ## How to use this Library
 This api must use kotlin only.
