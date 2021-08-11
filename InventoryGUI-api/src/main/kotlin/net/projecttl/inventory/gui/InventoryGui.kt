@@ -12,18 +12,23 @@ import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.Plugin
 
+val inventoryIDs = ArrayList<InventoryGuiBuilder>()
+
 fun Plugin.gui(slotType: InventoryType, title: Component, init: InventoryGuiBuilder.() -> Unit) : Inventory {
-    return InventoryGuiBuilder(slotType, title, this).apply(init).build()
+    val a = InventoryGuiBuilder(slotType, title, this)
+    inventoryIDs.add(a)
+    return a.apply(init).build()
 }
 
 fun gui(slotType: InventoryType, title: Component, plugin: Plugin, init: InventoryGuiBuilder.() -> Unit) : Inventory {
-    return InventoryGuiBuilder(slotType, title, plugin).apply(init).build()
+    val a = InventoryGuiBuilder(slotType, title, plugin)
+    inventoryIDs.add(a)
+    return a.apply(init).build()
 }
 
 class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val plugin: Plugin) : Listener {
 
     private val slots = hashMapOf<Int, Slot>()
-    private var closed = false
 
     fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
         slots[slot] = Slot(item, handler)
@@ -44,7 +49,7 @@ class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val
 
     @EventHandler
     private fun listener(event: InventoryClickEvent) {
-        if(event.currentItem != null && !closed) {
+        if(event.currentItem != null && !inventoryIDs.contains(this)) {
             for(slot in slots.entries) {
                 if(event.view.title() == this.title && slot.key == event.slot) {
                     event.isCancelled = true
@@ -56,7 +61,7 @@ class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val
 
     @EventHandler
     private fun close(event: InventoryCloseEvent) {
-        closed = true
+        inventoryIDs.remove(this)
     }
 
 }
