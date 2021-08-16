@@ -17,6 +17,8 @@ import org.bukkit.plugin.Plugin
 import java.util.*
 import kotlin.collections.HashMap
 
+val inventoryIds = HashMap<UUID, InventoryGuiBuilder>()
+
 fun Player.gui(plugin: Plugin, slotType: InventoryType, title: Component, init: InventoryGuiBuilder.() -> Unit) {
     val a = InventoryGuiBuilder(player!!, slotType, title, plugin)
     a.apply(init).build()
@@ -32,6 +34,12 @@ fun gui(player: Player, slotType: InventoryType, title: Component, plugin: Plugi
 class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val title: Component, val plugin: Plugin) : Listener {
 
     private val slots = hashMapOf<Int, Slot>()
+
+    private val inventoryId = UUID.randomUUID()
+
+    init {
+        inventoryIds[inventoryId] = this
+    }
 
     fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
         slots[slot] = Slot(item, handler)
@@ -54,7 +62,7 @@ class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val t
     private fun listener(event: InventoryClickEvent) {
         if(event.view.title() == this.title) {
             event.isCancelled = true
-            if (event.currentItem != null && event.view.player == player) {
+            if (inventoryIds.contains(inventoryId) && event.currentItem != null && event.view.player == player) {
                 for (slot in slots.entries) {
                     if (slot.key == event.slot) {
                         slot.value.click(event)
@@ -65,9 +73,15 @@ class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val t
     }
 
     @EventHandler
-    private fun liistener2(event: InventoryMoveItemEvent) {
-        if(event.source.holder?.inventory?.viewers?.contains(player)!! && event.source.holder is Container && (event.source.holder as Container).customName() == this.title)
+    private fun listener2(event: InventoryMoveItemEvent) {
+        if(inventoryIds.contains(inventoryId) && event.source.holder?.inventory?.viewers?.contains(player)!! && event.source.holder is Container && (event.source.holder as Container).customName() == this.title)
             event.isCancelled = true
+    }
+
+    @EventHandler
+    private fun listener3(event: InventoryCloseEvent) {
+        if(event.view.player == player && inventoryIds.contains(inventoryId))
+            inventoryIds.remove(inventoryId)
     }
 
 }
