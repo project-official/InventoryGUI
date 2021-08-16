@@ -5,6 +5,7 @@ import net.projecttl.inventory.gui.utils.InventoryType
 import net.projecttl.inventory.gui.utils.Slot
 import org.bukkit.Bukkit
 import org.bukkit.block.Container
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -13,24 +14,32 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.Plugin
+import java.util.*
+import kotlin.collections.HashMap
 
-val inventoryIDs = ArrayList<InventoryGuiBuilder>()
+val inventoryIds = HashMap<UUID, InventoryGuiBuilder>()
 
-fun Plugin.gui(slotType: InventoryType, title: Component, init: InventoryGuiBuilder.() -> Unit) : Inventory {
-    val a = InventoryGuiBuilder(slotType, title, this)
-    inventoryIDs.add(a)
-    return a.apply(init).build()
+fun Player.gui(plugin: Plugin, slotType: InventoryType, title: Component, init: InventoryGuiBuilder.() -> Unit) {
+    val a = InventoryGuiBuilder(player!!, slotType, title, plugin)
+    a.apply(init).build()
 }
 
-fun gui(slotType: InventoryType, title: Component, plugin: Plugin, init: InventoryGuiBuilder.() -> Unit) : Inventory {
+/*
+fun gui(player: Player, slotType: InventoryType, title: Component, plugin: Plugin, init: InventoryGuiBuilder.() -> Unit) : Inventory {
     val a = InventoryGuiBuilder(slotType, title, plugin)
-    inventoryIDs.add(a)
     return a.apply(init).build()
 }
+ */
 
-class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val plugin: Plugin) : Listener {
+class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val title: Component, val plugin: Plugin) : Listener {
 
     private val slots = hashMapOf<Int, Slot>()
+
+    private val inventoryId = UUID.randomUUID()
+
+    init {
+        inventoryIds[inventoryId] = this
+    }
 
     fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
         slots[slot] = Slot(item, handler)
@@ -40,20 +49,20 @@ class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val
         slot(slot, item) {}
     }
 
-    fun build() : Inventory {
+    fun build() {
         val inv = Bukkit.createInventory(null, slotType.name.split("_")[1].toInt(), title)
         for (slot in slots.entries) {
             inv.setItem(slot.key, slot.value.stack)
         }
+        player.openInventory(inv)
         Bukkit.getServer().pluginManager.registerEvents(this, plugin)
-        return inv
     }
 
     @EventHandler
     private fun listener(event: InventoryClickEvent) {
         if(event.view.title() == this.title) {
             event.isCancelled = true
-            if (event.currentItem != null && !inventoryIDs.contains(this)) {
+            if (inventoryIds.contains(inventoryId) && event.currentItem != null && event.view.player == player) {
                 for (slot in slots.entries) {
                     if (slot.key == event.slot) {
                         slot.value.click(event)
@@ -64,15 +73,15 @@ class InventoryGuiBuilder(val slotType: InventoryType, val title: Component, val
     }
 
     @EventHandler
-    private fun liistener2(event: InventoryMoveItemEvent) {
-        if(!inventoryIDs.contains(this) && event.source.holder is Container && (event.source.holder as Container).customName() == this.title) {
+    private fun listener2(event: InventoryMoveItemEvent) {
+        if(inventoryIds.contains(inventoryId) && event.source.holder?.inventory?.viewers?.contains(player)!! && event.source.holder is Container && (event.source.holder as Container).customName() == this.title)
             event.isCancelled = true
-        }
     }
 
     @EventHandler
-    private fun close(event: InventoryCloseEvent) {
-        inventoryIDs.remove(this)
+    private fun listener3(event: InventoryCloseEvent) {
+        if(event.view.player == player && inventoryIds.contains(inventoryId))
+            inventoryIds.remove(inventoryId)
     }
 
 }
