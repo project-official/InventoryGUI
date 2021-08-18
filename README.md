@@ -69,9 +69,9 @@ libraries:
 ## How to use this Library
 This api must use kotlin only. (you can use java but it will be hard.)
 ```Kotlin
-class TestGui() {
+class TestGui(val plugin: JavaPlugin) {
   fun inventory(player: Player) {
-    player.gui(InventoryType.CHEST_27, Component.text("TestGUI")) {
+    player.gui(plugin, InventoryType.CHEST_27, Component.text("TestGUI")) {
         slot(0, ItemStack(Material.GRASS_BLOCK)) {
             player.sendMessage("Hello!")
         }
