@@ -21,6 +21,8 @@ class Animation(val player: Player, val slotType: InventoryType, val title: Comp
 
     lateinit var onStopEvent: () -> Unit
 
+    lateinit var onPlayAnimation: (ticks: Int) -> Unit
+
     var tick = 0
     var lastAvailableTicks = -1
 
@@ -40,6 +42,10 @@ class Animation(val player: Player, val slotType: InventoryType, val title: Comp
         onStopEvent = func
     }
 
+    fun onPlay(func: (ticks: Int) -> Unit) {
+        onPlayAnimation = func
+    }
+
     fun start(resetTicks: Boolean = true) {
         if(resetTicks) {
             tick = 0
@@ -57,6 +63,8 @@ class Animation(val player: Player, val slotType: InventoryType, val title: Comp
                         }
                     }
                     player.openInventory(inv)
+                    if(this::onPlayAnimation.isInitialized)
+                        onPlayAnimation(tick)
                     if(tick == frames.lastKey())
                         running = false
                 }
