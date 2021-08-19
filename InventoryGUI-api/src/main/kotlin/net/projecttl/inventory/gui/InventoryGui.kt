@@ -33,9 +33,11 @@ fun gui(player: Player, slotType: InventoryType, title: Component, plugin: Plugi
 
 class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val title: Component, val plugin: Plugin) : Listener {
 
-    private val slots = hashMapOf<Int, Slot>()
+    val slots = hashMapOf<Int, Slot>()
 
     private val inventoryId = UUID.randomUUID()
+
+    private lateinit var inv: Inventory
 
     init {
         inventoryIds[inventoryId] = this
@@ -49,13 +51,19 @@ class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val t
         slot(slot, item) {}
     }
 
-    fun build() {
-        val inv = Bukkit.createInventory(null, slotType.name.split("_")[1].toInt(), title)
+    fun close() {
+        if(this::inv.isInitialized)
+            inv.close()
+    }
+
+    fun build() : Inventory {
+        inv = Bukkit.createInventory(null, slotType.name.split("_")[1].toInt(), title)
         for (slot in slots.entries) {
             inv.setItem(slot.key, slot.value.stack)
         }
         player.openInventory(inv)
         Bukkit.getServer().pluginManager.registerEvents(this, plugin)
+        return inv
     }
 
     @EventHandler

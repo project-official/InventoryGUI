@@ -1,5 +1,5 @@
-/.gradle/
-/.idea/
-/build/
+.gradle/
+.idea/
+build/
 *.gpg
-/gradle.properties
+gradle.properties
