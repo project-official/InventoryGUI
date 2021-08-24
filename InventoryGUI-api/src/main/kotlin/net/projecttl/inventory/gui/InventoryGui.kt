@@ -69,12 +69,15 @@ class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val t
     @EventHandler
     private fun listener(event: InventoryClickEvent) {
         if(event.view.title() == this.title) {
-            event.isCancelled = true
             if (inventoryIds.contains(inventoryId) && event.currentItem != null && event.view.player == player) {
-                for (slot in slots.entries) {
-                    if (slot.key == event.slot) {
-                        slot.value.click(event)
+                if (event.inventory == inv) {
+                    for (slot in slots.entries) {
+                        if (slot.key == event.slot) {
+                            slot.value.click(event)
+                        }
                     }
+
+                    event.isCancelled = true
                 }
             }
         }
@@ -82,7 +85,7 @@ class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val t
 
     @EventHandler
     private fun listener2(event: InventoryMoveItemEvent) {
-        if(inventoryIds.contains(inventoryId) && event.source.holder?.inventory?.viewers?.contains(player)!! && event.source.holder is Container && (event.source.holder as Container).customName() == this.title)
+        if (inventoryIds.contains(inventoryId) && event.source.holder?.inventory?.viewers?.contains(player)!! && event.source.holder is Container && (event.source.holder as Container).customName() == this.title)
             event.isCancelled = true
     }
 
