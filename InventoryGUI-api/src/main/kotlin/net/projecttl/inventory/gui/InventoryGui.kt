@@ -72,7 +72,7 @@ class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val t
             if (inventoryIds.contains(inventoryId) && event.currentItem != null && event.view.player == player) {
                 if (event.inventory == inv) {
                     for (slot in slots.entries) {
-                        if (slot.key == event.slot) {
+                        if (slot.key == event.rawSlot){
                             slot.value.click(event)
                         }
                     }
