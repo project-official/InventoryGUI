@@ -74,10 +74,9 @@ class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val t
                     for (slot in slots.entries) {
                         if (slot.key == event.rawSlot){
                             slot.value.click(event)
+                            event.isCancelled = true
                         }
                     }
-
-                    event.isCancelled = true
                 }
             }
         }

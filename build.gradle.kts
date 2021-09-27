@@ -1,12 +1,12 @@
 plugins {
     java
-    kotlin("jvm") version "1.5.30"
+    kotlin("jvm") version "1.5.31"
     id("org.jetbrains.dokka") version "1.5.0"
     `maven-publish`
 }
 
 group = "net.projecttl"
-version = "4.1.4"
+version = "4.1.5"
 
 allprojects {
     repositories {
@@ -16,7 +16,7 @@ allprojects {
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin= "org.jetbrains.dokka")
+    apply(plugin = "org.jetbrains.dokka")
 
     repositories {
         maven("https://papermc.io/repo/repository/maven-public/")
@@ -28,6 +28,7 @@ subprojects {
     dependencies {
         implementation("net.kyori:adventure-api:4.7.0")
         implementation(kotlin("stdlib"))
+
         compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
     }
 }
