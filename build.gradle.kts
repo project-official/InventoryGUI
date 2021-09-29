@@ -19,7 +19,7 @@ subprojects {
         mavenCentral()
         maven("https://jitpack.io/")
         maven("https://papermc.io/repo/repository/maven-public/")
-        maven("https://repo.projecttl.net/repository/maven-public")
+        maven("https://repo.projecttl.net/repository/maven-public") // Project_TL's nexus server
         maven("https://oss.sonatype.org/content/repositories/snapshots/")
     }
 
