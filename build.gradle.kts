@@ -1,12 +1,10 @@
 plugins {
     java
     kotlin("jvm") version "1.5.31"
-    id("org.jetbrains.dokka") version "1.5.0"
-    `maven-publish`
 }
 
 group = "net.projecttl"
-version = "4.1.5"
+version = "4.1.5-SNAPSHOT"
 
 allprojects {
     repositories {
@@ -16,13 +14,13 @@ allprojects {
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "org.jetbrains.dokka")
 
     repositories {
+        mavenCentral()
+        maven("https://jitpack.io/")
         maven("https://papermc.io/repo/repository/maven-public/")
-        maven(url = "https://oss.sonatype.org/content/repositories/snapshots/") {
-            name = "sonatype-oss-snapshots"
-        }
+        maven("https://repo.projecttl.net/repository/maven-public")
+        maven("https://oss.sonatype.org/content/repositories/snapshots/")
     }
 
     dependencies {

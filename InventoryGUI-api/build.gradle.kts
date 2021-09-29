@@ -1,5 +1,6 @@
 plugins {
     id("com.github.johnrengelman.shadow") version "7.0.0"
+    id("org.jetbrains.dokka") version "1.5.0"
     `maven-publish`
     signing
 }
@@ -34,15 +35,18 @@ publishing {
             repositories {
                 maven {
                     name = "MavenCentral"
-                    val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                    val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                    // val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                    // val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                    val releasesRepoUrl = "https://repo.projecttl.net/repository/maven-releases/"
+                    val snapshotsRepoUrl = "https://repo.projecttl.net/repository/maven-snapshots/"
+
                     url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
 
                     credentials.runCatching {
-                        val MAVEN_UPLOAD_USER: String = (project.properties["ossUserName"] as String?)!!
-                        val MAVEN_UPLOAD_PWD: String = (project.properties["ossPassword"] as String?)!!
-                        username = MAVEN_UPLOAD_USER
-                        password = MAVEN_UPLOAD_PWD
+                        val ossUserName: String = (project.properties["ossUserName"] as String?)!!
+                        val ossPassword: String = (project.properties["ossPassword"] as String?)!!
+                        username = ossUserName
+                        password = ossPassword
                     }
                 }
 
