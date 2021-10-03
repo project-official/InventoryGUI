@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "net.projecttl"
-version = "4.1.4"
+version = "4.1.5"
 
 allprojects {
     repositories {
