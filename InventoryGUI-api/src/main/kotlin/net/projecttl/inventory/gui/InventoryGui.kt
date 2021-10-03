@@ -31,7 +31,7 @@ fun gui(player: Player, slotType: InventoryType, title: Component, plugin: Plugi
 }
  */
 
-class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val title: Component, val plugin: Plugin) : Listener {
+class InventoryGuiBuilder(private val player: Player, private val slotType: InventoryType, private val title: Component, private val plugin: Plugin) : Listener {
 
     val slots = hashMapOf<Int, Slot>()
 
@@ -43,12 +43,12 @@ class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val t
         inventoryIds[inventoryId] = this
     }
 
-    fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
-        slots[slot] = Slot(item, handler)
+    fun slot(slot: Int, item: ItemStack, ignoreClick: Boolean = true, handler: InventoryClickEvent.() -> Unit) {
+        slots[slot] = Slot(item, ignoreClick, handler)
     }
 
-    fun slot(slot: Int, item: ItemStack) {
-        slot(slot, item) {}
+    fun slot(slot: Int, item: ItemStack, ignoreClick: Boolean = true) {
+        slot(slot, item, ignoreClick) {}
     }
 
     fun close() {
@@ -74,7 +74,7 @@ class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val t
                     for (slot in slots.entries) {
                         if (slot.key == event.rawSlot){
                             slot.value.click(event)
-                            event.isCancelled = true
+                            event.isCancelled = slot.value.ignoreClick
                         }
                     }
                 }
@@ -84,8 +84,9 @@ class InventoryGuiBuilder(val player: Player, val slotType: InventoryType, val t
 
     @EventHandler
     private fun listener2(event: InventoryMoveItemEvent) {
-        if (inventoryIds.contains(inventoryId) && event.source.holder?.inventory?.viewers?.contains(player)!! && event.source.holder is Container && (event.source.holder as Container).customName() == this.title)
-            event.isCancelled = true
+        if (inventoryIds.contains(inventoryId) && event.source.holder?.inventory?.viewers?.contains(player)!!
+            && event.source.holder is Container && (event.source.holder as Container).customName() == this.title)
+                event.isCancelled = true
     }
 
     @EventHandler
