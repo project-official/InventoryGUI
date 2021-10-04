@@ -9,15 +9,21 @@ group = "net.projecttl"
 version = "4.1.5"
 
 allprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "org.jetbrains.dokka")
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(11))
+        }
+    }
+
     repositories {
         mavenCentral()
     }
 }
 
 subprojects {
-    apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "org.jetbrains.dokka")
-
     repositories {
         maven("https://papermc.io/repo/repository/maven-public/")
         maven(url = "https://oss.sonatype.org/content/repositories/snapshots/") {
