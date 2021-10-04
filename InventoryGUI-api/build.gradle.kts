@@ -39,10 +39,8 @@ publishing {
                     url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
 
                     credentials.runCatching {
-                        val MAVEN_UPLOAD_USER: String = (project.properties["ossUserName"] as String?)!!
-                        val MAVEN_UPLOAD_PWD: String = (project.properties["ossPassword"] as String?)!!
-                        username = MAVEN_UPLOAD_USER
-                        password = MAVEN_UPLOAD_PWD
+                        username = project.properties["username"] as String?
+                        password = project.properties["password"] as String?
                     }
                 }
 
