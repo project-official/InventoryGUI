@@ -13,30 +13,21 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryMoveItemEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
-import org.bukkit.plugin.Plugin
+import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 import kotlin.collections.HashMap
 
 val inventoryIds = HashMap<UUID, InventoryGuiBuilder>()
 
-fun Player.gui(plugin: Plugin, slotType: InventoryType, title: Component, init: InventoryGuiBuilder.() -> Unit) {
+fun Player.gui(plugin: JavaPlugin, slotType: InventoryType, title: Component, init: InventoryGuiBuilder.() -> Unit) {
     val a = InventoryGuiBuilder(player!!, slotType, title, plugin)
     a.apply(init).build()
 }
 
-/*
-fun gui(player: Player, slotType: InventoryType, title: Component, plugin: Plugin, init: InventoryGuiBuilder.() -> Unit) : Inventory {
-    val a = InventoryGuiBuilder(slotType, title, plugin)
-    return a.apply(init).build()
-}
- */
-
-class InventoryGuiBuilder(private val player: Player, private val slotType: InventoryType, private val title: Component, private val plugin: Plugin) : Listener {
+class InventoryGuiBuilder(private val player: Player, private val slotType: InventoryType, private val title: Component, private val plugin: JavaPlugin) : Listener {
 
     val slots = hashMapOf<Int, Slot>()
-
     private val inventoryId = UUID.randomUUID()
-
     private lateinit var inv: Inventory
 
     init {

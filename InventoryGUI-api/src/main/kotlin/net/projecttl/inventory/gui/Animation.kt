@@ -4,16 +4,15 @@ import net.kyori.adventure.text.Component
 import net.projecttl.inventory.gui.utils.InventoryType
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
-import org.bukkit.plugin.Plugin
+import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
-import kotlin.collections.HashMap
 
-fun Player.animatedGui(plugin: Plugin, slotType: InventoryType, title: Component, init: Animation.() -> Unit) : Animation {
+fun Player.animatedGui(plugin: JavaPlugin, slotType: InventoryType, title: Component, init: Animation.() -> Unit) : Animation {
     val a = Animation(this, slotType, title, plugin).apply(init)
     return a
 }
 
-class Animation(val player: Player, val slotType: InventoryType, val title: Component, val plugin: Plugin) {
+class Animation(val player: Player, val slotType: InventoryType, val title: Component, val plugin: JavaPlugin) {
 
     lateinit var base: InventoryGuiBuilder
 
