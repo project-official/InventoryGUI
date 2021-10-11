@@ -34,12 +34,12 @@ class InventoryGuiBuilder(private val player: Player, private val slotType: Inve
         inventoryIds[inventoryId] = this
     }
 
-    fun slot(slot: Int, item: ItemStack, ignoreClick: Boolean = true, handler: InventoryClickEvent.() -> Unit) {
-        slots[slot] = Slot(item, ignoreClick, handler)
+    fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
+        slots[slot] = Slot(item, handler)
     }
 
-    fun slot(slot: Int, item: ItemStack, ignoreClick: Boolean = true) {
-        slot(slot, item, ignoreClick) {}
+    fun slot(slot: Int, item: ItemStack) {
+        slot(slot, item) {}
     }
 
     fun close() {
@@ -65,7 +65,6 @@ class InventoryGuiBuilder(private val player: Player, private val slotType: Inve
                     for (slot in slots.entries) {
                         if (slot.key == event.rawSlot){
                             slot.value.click(event)
-                            event.isCancelled = slot.value.ignoreClick
                         }
                     }
                 }
