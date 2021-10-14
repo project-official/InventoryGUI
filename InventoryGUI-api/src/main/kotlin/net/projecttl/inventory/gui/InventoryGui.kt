@@ -65,6 +65,7 @@ class InventoryGuiBuilder(private val player: Player, private val slotType: Inve
                 if (event.inventory == inv) {
                     for (slot in slots.entries) {
                         if (slot.key == event.rawSlot){
+                            event.isCancelled = true
                             slot.value.click(event)
                         }
                     }
