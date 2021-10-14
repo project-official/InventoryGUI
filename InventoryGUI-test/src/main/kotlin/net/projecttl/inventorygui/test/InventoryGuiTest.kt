@@ -5,7 +5,9 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import net.projecttl.inventory.gui.animatedGui
+import net.projecttl.inventory.gui.gui
 import net.projecttl.inventory.gui.utils.InventoryType
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -17,6 +19,11 @@ class InventoryGuiTest : JavaPlugin(), Listener {
 
     override fun onEnable() {
         server.pluginManager.registerEvents(this, this)
+        Bukkit.getPlayer("")?.gui(this, InventoryType.CHEST_27, Component.text("")) {
+            slot(1, ItemStack(Material.IRON_INGOT)) {
+                isCancelled = false
+            }
+        }
     }
 
     @EventHandler
