@@ -50,7 +50,7 @@ publishing {
                     url.set("https://github.com/ProjectTL12345/InventoryGUI")
                     licenses {
                         license {
-                            name.set("GNU GENERAL PUBLIC LICENSE Version 3")
+                            name.set("GNU General Public License Version 3")
                             url.set("https://www.gnu.org/licenses/gpl-3.0.txt")
                         }
                     }
