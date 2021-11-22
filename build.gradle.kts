@@ -1,20 +1,22 @@
 plugins {
     java
-    kotlin("jvm") version "1.5.31"
+    kotlin("jvm") version "1.6.0"
     id("org.jetbrains.dokka") version "1.5.0"
+    id("com.github.johnrengelman.shadow") version "7.1.0"
     `maven-publish`
 }
 
 group = "net.projecttl"
-version = "4.1.8"
+version = "4.2.0"
 
 allprojects {
+    apply(plugin = "com.github.johnrengelman.shadow")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.dokka")
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(11))
+            languageVersion.set(JavaLanguageVersion.of(16))
         }
     }
 
@@ -35,6 +37,6 @@ subprojects {
         implementation(kotlin("stdlib"))
         implementation("net.kyori:adventure-api:4.7.0")
 
-        compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
     }
 }

@@ -1,5 +1,4 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.0"
     `maven-publish`
     signing
 }
@@ -39,15 +38,17 @@ publishing {
                     url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
 
                     credentials.runCatching {
-                        username = project.properties["username"] as String?
-                        password = project.properties["password"] as String?
+                        val nexusUsername: String by project
+                        val nexusPassword: String by project
+                        username = nexusUsername
+                        password = nexusPassword
                     }
                 }
 
                 pom {
                     name.set(rootProject.name)
                     description.set("This is minecraft gui library")
-                    url.set("https://github.com/ProjectTL12345/InventoryGUI")
+                    url.set("https://github.com/DevProject/InventoryGUI")
                     licenses {
                         license {
                             name.set("GNU General Public License Version 3")
@@ -56,15 +57,15 @@ publishing {
                     }
                     developers {
                         developer {
-                            id.set("ProjectTL12345")
-                            name.set("Project_TL")
+                            id.set("DevProject04")
+                            name.set("Dev_Project")
                             email.set("me@projecttl.net")
                         }
                     }
                     scm {
-                        connection.set("scm:git:https://github.com/ProjetTL12345/InventoryGUI.git")
-                        developerConnection.set("scm:git:https://github.com/ProjetTL12345/InventoryGUI.git")
-                        url.set("https://github.com/ProjetTL12345/InventoryGUI.git")
+                        connection.set("scm:git:https://github.com/DevProject04/InventoryGUI.git")
+                        developerConnection.set("scm:git:https://github.com/DevProject04/InventoryGUI.git")
+                        url.set("https://github.com/DevProject04/InventoryGUI.git")
                     }
                 }
             }
