@@ -1,7 +1,9 @@
-package net.projecttl.inventory.gui.utils
+package net.projecttl.inventory.util
 
+/**
+ * Inventory Types
+ */
 enum class InventoryType(val size: Int) {
-
     CHEST_9(9),
     CHEST_18(18),
     CHEST_27(27),

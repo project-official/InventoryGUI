@@ -3,9 +3,6 @@ plugins {
     signing
 }
 
-group = rootProject.group
-version = rootProject.version
-
 tasks {
     javadoc {
         options.encoding = "UTF-8"
@@ -44,29 +41,29 @@ publishing {
                         password = nexusPassword
                     }
                 }
+            }
 
-                pom {
-                    name.set(rootProject.name)
-                    description.set("This is minecraft gui library")
-                    url.set("https://github.com/DevProject/InventoryGUI")
-                    licenses {
-                        license {
-                            name.set("GNU General Public License Version 3")
-                            url.set("https://www.gnu.org/licenses/gpl-3.0.txt")
-                        }
+            pom {
+                name.set(rootProject.name)
+                description.set("This is minecraft gui library")
+                url.set("https://github.com/DevProject/InventoryGUI")
+                licenses {
+                    license {
+                        name.set("GNU General Public License Version 3")
+                        url.set("https://www.gnu.org/licenses/gpl-3.0.txt")
                     }
-                    developers {
-                        developer {
-                            id.set("DevProject04")
-                            name.set("Dev_Project")
-                            email.set("me@projecttl.net")
-                        }
+                }
+                developers {
+                    developer {
+                        id.set("DevProject04")
+                        name.set("Dev_Project")
+                        email.set("me@projecttl.net")
                     }
-                    scm {
-                        connection.set("scm:git:https://github.com/DevProject04/InventoryGUI.git")
-                        developerConnection.set("scm:git:https://github.com/DevProject04/InventoryGUI.git")
-                        url.set("https://github.com/DevProject04/InventoryGUI.git")
-                    }
+                }
+                scm {
+                    connection.set("scm:git:https://github.com/DevProject04/InventoryGUI.git")
+                    developerConnection.set("scm:git:https://github.com/DevProject04/InventoryGUI.git")
+                    url.set("https://github.com/DevProject04/InventoryGUI.git")
                 }
             }
         }

@@ -1,8 +1,10 @@
 package net.projecttl.inventory.gui
 
 import net.kyori.adventure.text.Component
-import net.projecttl.inventory.gui.utils.InventoryType
-import net.projecttl.inventory.gui.utils.Slot
+import net.projecttl.inventory.InventoryGUI.inventoryIds
+import net.projecttl.inventory.InventoryGUI.plugin
+import net.projecttl.inventory.util.InventoryType
+import net.projecttl.inventory.util.Slot
 import org.bukkit.Bukkit
 import org.bukkit.block.Container
 import org.bukkit.entity.Player
@@ -14,55 +16,51 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent
 import org.bukkit.event.player.PlayerSwapHandItemsEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
-import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 import kotlin.collections.HashMap
 
-val inventoryIds = HashMap<UUID, InventoryGuiBuilder>()
+class SimpleInventoryBuilder(override val player: Player, override val slotType: InventoryType, override val title: Component) : Listener,
+    InventoryBuilder {
 
-fun Player.gui(plugin: JavaPlugin, slotType: InventoryType, title: Component, init: InventoryGuiBuilder.() -> Unit) {
-    val a = InventoryGuiBuilder(player!!, slotType, title, plugin)
-    a.apply(init).build()
-}
+    override val slots = HashMap<Int, Slot>()
 
-class InventoryGuiBuilder(private val player: Player, private val slotType: InventoryType, private val title: Component, private val plugin: JavaPlugin) : Listener {
-
-    val slots = hashMapOf<Int, Slot>()
-    private val inventoryId = UUID.randomUUID()
-    private lateinit var inv: Inventory
+    @Suppress("WeakerAccess")
+    override val id: UUID = UUID.randomUUID()
+    override lateinit var inventory: Inventory
+        private set
 
     init {
-        inventoryIds[inventoryId] = this
+        inventoryIds[id] = this
     }
 
-    fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
+    override fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
         slots[slot] = Slot(item, handler)
     }
 
-    fun slot(slot: Int, item: ItemStack) {
+    override fun slot(slot: Int, item: ItemStack) {
         slot(slot, item) {}
     }
 
-    fun close() {
-        if(this::inv.isInitialized)
-            inv.close()
+    override fun close() {
+        if(this::inventory.isInitialized)
+            inventory.close()
     }
 
-    fun build() : Inventory {
-        inv = Bukkit.createInventory(null, slotType.name.split("_")[1].toInt(), title)
+    override fun build() : Inventory {
+        inventory = Bukkit.createInventory(null, slotType.size, title)
         for (slot in slots.entries) {
-            inv.setItem(slot.key, slot.value.stack)
+            inventory.setItem(slot.key, slot.value.stack)
         }
-        player.openInventory(inv)
+        player.openInventory(inventory)
         Bukkit.getServer().pluginManager.registerEvents(this, plugin)
-        return inv
+        return inventory
     }
 
     @EventHandler
     private fun listener(event: InventoryClickEvent) {
         if(event.view.title() == this.title) {
-            if (inventoryIds.contains(inventoryId) && event.currentItem != null && event.view.player == player) {
-                if (event.inventory == inv) {
+            if (inventoryIds.contains(id) && event.currentItem != null && event.view.player == player) {
+                if (event.inventory == inventory) {
                     for (slot in slots.entries) {
                         if (slot.key == event.rawSlot){
                             event.isCancelled = true
@@ -76,21 +74,27 @@ class InventoryGuiBuilder(private val player: Player, private val slotType: Inve
 
     @EventHandler
     private fun listener2(event: InventoryMoveItemEvent) {
-        if (inventoryIds.contains(inventoryId) && event.source.holder?.inventory?.viewers?.contains(player)!!
+        if (inventoryIds.contains(id) && event.source.holder?.inventory?.viewers?.contains(player)!!
             && event.source.holder is Container && (event.source.holder as Container).customName() == this.title)
                 event.isCancelled = true
     }
 
     @EventHandler
     private fun listener3(event: InventoryCloseEvent) {
-        if(event.view.player == player && inventoryIds.contains(inventoryId))
-            inventoryIds.remove(inventoryId)
+        if(event.view.player == player && inventoryIds.contains(id))
+            inventoryIds.remove(id)
     }
 
     @EventHandler
     private fun listener4(event: PlayerSwapHandItemsEvent) {
-        if (event.player.inventory == inv) {
+        if (event.player.inventory == inventory) {
             event.isCancelled = true
+        }
+    }
+
+    override fun destroy() {
+        if (player.openInventory.topInventory == inventory) {
+            player.closeInventory()
         }
     }
 }

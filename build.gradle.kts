@@ -16,7 +16,7 @@ allprojects {
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(16))
+            languageVersion.set(JavaLanguageVersion.of(17))
         }
     }
 
@@ -26,6 +26,9 @@ allprojects {
 }
 
 subprojects {
+    group = rootProject.group
+    version = rootProject.version
+
     repositories {
         maven("https://papermc.io/repo/repository/maven-public/")
         maven(url = "https://oss.sonatype.org/content/repositories/snapshots/") {
@@ -35,8 +38,11 @@ subprojects {
 
     dependencies {
         implementation(kotlin("stdlib"))
-        implementation("net.kyori:adventure-api:4.7.0")
-
-        compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.18-R0.1-SNAPSHOT")
+        if (this@subprojects.name != "InventoryGUI-api") {
+            dependencies {
+                implementation(project(":InventoryGUI-api"))
+            }
+        }
     }
 }

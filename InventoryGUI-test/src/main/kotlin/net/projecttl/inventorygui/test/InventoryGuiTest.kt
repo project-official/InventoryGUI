@@ -2,11 +2,12 @@ package net.projecttl.inventorygui.test
 
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
-import net.projecttl.inventory.gui.animatedGui
-import net.projecttl.inventory.gui.gui
-import net.projecttl.inventory.gui.utils.InventoryType
+import net.projecttl.inventory.animatedGui
+import net.projecttl.inventory.gui
+import net.projecttl.inventory.util.InventoryType
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -19,7 +20,7 @@ class InventoryGuiTest : JavaPlugin(), Listener {
 
     override fun onEnable() {
         server.pluginManager.registerEvents(this, this)
-        Bukkit.getPlayer("")?.gui(this, InventoryType.CHEST_27, Component.text("")) {
+        Bukkit.getPlayer("")?.gui(text("")) {
             slot(1, ItemStack(Material.IRON_INGOT)) {
                 isCancelled = false
             }
@@ -30,7 +31,7 @@ class InventoryGuiTest : JavaPlugin(), Listener {
     fun chat(event: AsyncChatEvent) {
         if(PlainTextComponentSerializer.plainText().serialize(event.message()).contains("animation")) {
             println(PlainTextComponentSerializer.plainText().serialize(event.message()))
-            val anim = event.player.animatedGui(this, InventoryType.CHEST_27, Component.text("Hi", NamedTextColor.GREEN)) {
+            val anim = event.player.animatedGui(text("Hi", NamedTextColor.GREEN)) {
                 base {
                     slot(0, ItemStack(Material.WHITE_STAINED_GLASS_PANE))
                     slot(1, ItemStack(Material.WHITE_STAINED_GLASS_PANE))
