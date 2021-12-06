@@ -1,18 +1,18 @@
 # InventoryGUI
-This is Minecraft paper gui library.
+A papermc GUI library.
 
-* [Library Feature](https://github.com/ProjectTL12345/InventoryGUI#library-feature)
-* [Library License](https://github.com/ProjectTL12345/InventoryGUI#library-license)
-* [API Build](https://github.com/ProjectTL12345/InventoryGUI#import-library)
-* [How to use this Library](https://github.com/ProjectTL12345/InventoryGUI#how-to-use-this-library)
+* [Features](#Features)
+* [License](#License)
+* [Importing](#import-library)
+* [Usage](#how-to-use-this-library)
 
-## Library Feature
+## Features
 * DSL style code
-* Modular inventory gui with no event declaration required
+* Modular inventory GUI without the requirement of event declaration
 
-## Library License
-This API uses the GPL-3.0 open source license.
-* License: [InventoryGUI License](https://github.com/ProjectTL12345/InventoryGUI/blob/master/LICENSE)
+## License
+This library is licensed under the General Public License v3.0.
+* License: [InventoryGUI License](LICENSE)
 
 ## Import Library
 
@@ -56,9 +56,9 @@ dependencies {
   compileOnly("net.projecttl:InventoryGUI-api:VERSION")
 }
 ```
-Do not shade it! This can installed without shade (latest only feature)!
 
-* Plugin.YML (latest only)
+> If you are using spigot/paper 1.17+, you can use the library-loading feature instead of shading.
+* plugin.yml (1.17+)
 ```
 # ...
 libraries:
@@ -67,18 +67,21 @@ libraries:
 ```
 
 ## How to use this Library
-This api must use kotlin only. (you can use java but it will be hard.)
+This library is kotlin-optimized. DSL pattern will break unless you use kotlin.
 ```Kotlin
-class TestGui(val plugin: JavaPlugin) {
+class TestGui {
   fun inventory(player: Player) {
-    player.gui(plugin, InventoryType.CHEST_27, Component.text("TestGUI")) {
+    player.gui(Component.text("TestGUI"), InventoryType.CHEST_27) {
+        
+        // Prints 'Hello!' when clicked
         slot(0, ItemStack(Material.GRASS_BLOCK)) {
             player.sendMessage("Hello!")
         }
 
-        // dummy slot
+        // Does nothing on click
         slot(1, ItemStack(Material.IRON_INGOT))
     }
   }
 }
 ```
+> More examples [here](InventoryGUI-test/src/main/kotlin/net/projecttl/inventorygui/test/InventoryGuiTest.kt)

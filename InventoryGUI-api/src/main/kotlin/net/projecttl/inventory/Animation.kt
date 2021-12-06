@@ -1,20 +1,20 @@
-package net.projecttl.inventory.gui
+package net.projecttl.inventory
 
 import net.kyori.adventure.text.Component
-import net.projecttl.inventory.gui.utils.InventoryType
+import net.projecttl.inventory.InventoryGUI.plugin
+import net.projecttl.inventory.gui.InventoryBuilder
+import net.projecttl.inventory.gui.SimpleInventoryBuilder
+import net.projecttl.inventory.util.InventoryType
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
-fun Player.animatedGui(plugin: JavaPlugin, slotType: InventoryType, title: Component, init: Animation.() -> Unit) : Animation {
-    val a = Animation(this, slotType, title, plugin).apply(init)
-    return a
-}
+/**
+ * Animation!
+ */
+class Animation(val player: Player, val slotType: InventoryType, val title: Component) {
 
-class Animation(val player: Player, val slotType: InventoryType, val title: Component, val plugin: JavaPlugin) {
-
-    lateinit var base: InventoryGuiBuilder
+    lateinit var base: InventoryBuilder
 
     private var running = false
 
@@ -26,15 +26,15 @@ class Animation(val player: Player, val slotType: InventoryType, val title: Comp
     var lastAvailableTicks = -1
 
     // Tick, InventoryGui
-    val frames = TreeMap<Int, InventoryGuiBuilder>()
+    val frames = TreeMap<Int, SimpleInventoryBuilder>()
     var taskId: Int = -1
 
-    fun base(init: InventoryGuiBuilder.() -> Unit) {
-        base = InventoryGuiBuilder(player, slotType, title, plugin).apply(init)
+    fun base(init: SimpleInventoryBuilder.() -> Unit) {
+        base = SimpleInventoryBuilder(player, slotType, title).apply(init)
     }
 
-    fun frame(tick: Int, title: Component = this.title, init: InventoryGuiBuilder.() -> Unit) {
-        frames[tick] = InventoryGuiBuilder(player, slotType, title, plugin).apply(init)
+    fun frame(tick: Int, title: Component = this.title, init: SimpleInventoryBuilder.() -> Unit) {
+        frames[tick] = SimpleInventoryBuilder(player, slotType, title).apply(init)
     }
 
     fun onStop(func: () -> Unit) {
