@@ -2,6 +2,7 @@
 A papermc GUI library.
 
 * [Features](#Features)
+* [Contact](#Contact)
 * [License](#License)
 * [Importing](#import-library)
 * [Usage](#how-to-use-this-library)
@@ -9,6 +10,10 @@ A papermc GUI library.
 ## Features
 * DSL style code
 * Modular inventory GUI without the requirement of event declaration
+
+## Contact
+If you wanna send issues or discussions or PR more the faster, please contact with my discord server!
+[\[Discord Server\]]("https://discord.gg/ngcTymJQXX")
 
 ## License
 This library is licensed under the General Public License v3.0.
@@ -42,7 +47,7 @@ repositories {
 }
 
 dependencies {
-  compileOnly 'net.projecttl:InventoryGUI-api:VERSION'
+  implementation 'net.projecttl:InventoryGUI-api:VERSION'
 }
 ```
 
@@ -53,7 +58,7 @@ repositories {
 }
 
 dependencies {
-  compileOnly("net.projecttl:InventoryGUI-api:VERSION")
+  implementation("net.projecttl:InventoryGUI-api:VERSION")
 }
 ```
 
