@@ -28,6 +28,8 @@ data class LinkedInventoryBuilder(override val player: Player, override val slot
     override val id: UUID = UUID.randomUUID()
     override lateinit var inventory: Inventory
         private set
+        
+    val closeHandlers = ArrayList<InventoryCloseEvent.() -> Unit>()
 
     init {
         inventoryIds[id] = this
@@ -35,6 +37,10 @@ data class LinkedInventoryBuilder(override val player: Player, override val slot
 
     override fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
         slots[slot] = LinkedSlot(item, SlotHandler().apply { onClick(handler) })
+    }
+    
+    override fun onClose(handler: InventoryCloseEvent.() -> Unit) {
+        closeHandlers.add(handler)
     }
 
     override fun slot(slot: Int, item: ItemStack) {
@@ -94,6 +100,9 @@ data class LinkedInventoryBuilder(override val player: Player, override val slot
 
     @EventHandler
     private fun listener3(event: InventoryCloseEvent) {
+        for(closeHandler in closeHandlers) {
+            closeHandler(event)
+        }
         if (event.view.player == player && inventoryIds.contains(id))
             inventoryIds.remove(id)
     }
