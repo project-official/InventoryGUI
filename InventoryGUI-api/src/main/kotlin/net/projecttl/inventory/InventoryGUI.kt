@@ -7,6 +7,7 @@ import net.projecttl.inventory.gui.LinkedInventoryBuilder
 import net.projecttl.inventory.util.InventoryType
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
+import org.bukkit.plugin.InvalidPluginException
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.PluginClassLoader
 import java.util.*
@@ -23,13 +24,15 @@ object InventoryGUI {
 
     /**
      * The service plugin. Defaults to the plugin that loaded this library. You can modify this later if you want to
+     *
+     * @throws InvalidPluginException if the current library isn't loaded by a plugin
      */
     var plugin: JavaPlugin = javaClass.classLoader.run {
         fun checkLoader(classLoader: ClassLoader): ClassLoader {
             return if (classLoader is PluginClassLoader) {
                 this
             } else {
-                if (classLoader.parent == null) throw RuntimeException("Should be loaded by a plugin")
+                if (classLoader.parent == null) throw InvalidPluginException("Should be loaded by a plugin")
                 checkLoader(classLoader.parent)
             }
         }
