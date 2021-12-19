@@ -59,6 +59,11 @@ interface InventoryBuilder {
      * Registers a slot
      */
     fun slot(slot: Int, item: ItemStack)
+    
+    /**
+     * On close inventory
+     */
+    fun onClose(handler: InventoryCloseEvent.() -> Unit)
 
     /**
      * Close inventory for the current player

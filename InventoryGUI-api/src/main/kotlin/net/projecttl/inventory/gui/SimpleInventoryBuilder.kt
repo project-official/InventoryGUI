@@ -23,6 +23,8 @@ class SimpleInventoryBuilder(override val player: Player, override val slotType:
     InventoryBuilder {
 
     override val slots = HashMap<Int, Slot>()
+    
+    val closeHandlers = ArrayList<InventoryCloseEvent.() -> Unit>()
 
     @Suppress("WeakerAccess")
     override val id: UUID = UUID.randomUUID()
@@ -35,6 +37,10 @@ class SimpleInventoryBuilder(override val player: Player, override val slotType:
 
     override fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
         slots[slot] = Slot(item, handler)
+    }
+    
+    override fun onClose(handler: InventoryCloseEvent.() -> Unit) {
+        closeHandlers.add(handler)
     }
 
     override fun slot(slot: Int, item: ItemStack) {
@@ -81,6 +87,8 @@ class SimpleInventoryBuilder(override val player: Player, override val slotType:
 
     @EventHandler
     private fun listener3(event: InventoryCloseEvent) {
+        for(closeHandler in closeHandlers)
+            closeHandler(event)
         if(event.view.player == player && inventoryIds.contains(id))
             inventoryIds.remove(id)
     }
