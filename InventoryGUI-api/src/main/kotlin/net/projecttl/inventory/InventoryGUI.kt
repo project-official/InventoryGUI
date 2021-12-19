@@ -24,7 +24,18 @@ object InventoryGUI {
     /**
      * The service plugin. Defaults to the plugin that loaded this library. You can modify this later if you want to
      */
-    var plugin: JavaPlugin = (javaClass.classLoader as PluginClassLoader).plugin
+    var plugin: JavaPlugin = javaClass.classLoader.run {
+        fun checkLoader(classLoader: ClassLoader): ClassLoader {
+            return if (classLoader is PluginClassLoader) {
+                this
+            } else {
+                if (classLoader.parent == null) throw RuntimeException("Should be loaded by a plugin")
+                checkLoader(classLoader.parent)
+            }
+        }
+
+        (checkLoader(this) as PluginClassLoader).plugin
+    }
 }
 
 /**
