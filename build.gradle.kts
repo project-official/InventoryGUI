@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "net.projecttl"
-version = "4.3.0"
+version = "4.3.1"
 
 allprojects {
     apply(plugin = "com.github.johnrengelman.shadow")
