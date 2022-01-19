@@ -1,0 +1,26 @@
+name: Dokka Build
+on:
+  push:
+    branches: [master]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: JDK Setup
+        uses: actions/setup-java@v1
+        with:
+          java-version: 16
+      - run: sudo apt-get install dos2unix
+      - name: Dokka Build
+        run: |
+          dos2unix gradlew
+          chmod +x gradlew
+          ./gradlew javadocJar
+      - name: Github Pages Upload
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: InventoryGUI-api/build/dokka/html
