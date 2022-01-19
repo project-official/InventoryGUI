@@ -2,6 +2,7 @@
 A papermc GUI library.
 
 * [Features](#Features)
+* [Dokka](#Dokka)
 * [Contact](#Contact)
 * [License](#License)
 * [Importing](#import-library)
@@ -10,6 +11,10 @@ A papermc GUI library.
 ## Features
 * DSL style code
 * Modular inventory GUI without the requirement of event declaration
+
+## Dokka
+You can see the Dokka document.
+* Dokka: [Link](https://invgui.projecttl.net/)
 
 ## Contact
 If you wanna send issues or discussions or PR more the faster, please contact with my discord server!
