@@ -20,11 +20,6 @@ class InventoryGuiTest : JavaPlugin(), Listener {
 
     override fun onEnable() {
         server.pluginManager.registerEvents(this, this)
-        Bukkit.getPlayer("")?.gui(text("")) {
-            slot(1, ItemStack(Material.IRON_INGOT)) {
-                isCancelled = false
-            }
-        }
     }
 
     @EventHandler
@@ -77,6 +72,10 @@ class InventoryGuiTest : JavaPlugin(), Listener {
                 }
             }
             anim.start()
+        } else if(PlainTextComponentSerializer.plainText().serialize(event.message()).contains("normal")) {
+            event.player.gui(text("")) {
+                slot(1, ItemStack(Material.IRON_INGOT))
+            }
         }
     }
 
