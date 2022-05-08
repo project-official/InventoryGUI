@@ -4,10 +4,12 @@ import net.kyori.adventure.text.Component
 import net.projecttl.inventory.gui.InventoryBuilder
 import net.projecttl.inventory.gui.SimpleInventoryBuilder
 import net.projecttl.inventory.gui.LinkedInventoryBuilder
+import net.projecttl.inventory.util.Downstream
 import net.projecttl.inventory.util.InventoryType
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.InvalidPluginException
+import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.PluginClassLoader
 import java.util.*
@@ -27,6 +29,8 @@ object InventoryGUI {
      *
      * @throws InvalidPluginException if the current library isn't loaded by a plugin
      */
+    var plugin: Plugin = Downstream.pullPlugin()
+    /*
     var plugin: JavaPlugin = javaClass.classLoader.run {
         fun checkLoader(classLoader: ClassLoader): ClassLoader {
             return if (classLoader is PluginClassLoader) {
@@ -39,6 +43,7 @@ object InventoryGUI {
 
         (checkLoader(this) as PluginClassLoader).plugin
     }
+     */
 }
 
 /**
