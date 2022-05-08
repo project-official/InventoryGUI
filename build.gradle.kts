@@ -1,13 +1,13 @@
 plugins {
     java
-    kotlin("jvm") version "1.6.0"
-    id("org.jetbrains.dokka") version "1.5.0"
-    id("com.github.johnrengelman.shadow") version "7.1.0"
+    kotlin("jvm") version "1.6.21"
+    id("org.jetbrains.dokka") version "1.6.21"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
     `maven-publish`
 }
 
 group = "net.projecttl"
-version = "4.3.1"
+version = "4.4.0"
 
 allprojects {
     apply(plugin = "com.github.johnrengelman.shadow")
@@ -16,7 +16,7 @@ allprojects {
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(16))
+            languageVersion.set(JavaLanguageVersion.of(17))
         }
     }
 
@@ -38,7 +38,7 @@ subprojects {
 
     dependencies {
         implementation(kotlin("stdlib"))
-        compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
         if (this@subprojects.name != "InventoryGUI-api") {
             dependencies {
                 implementation(project(":InventoryGUI-api"))
