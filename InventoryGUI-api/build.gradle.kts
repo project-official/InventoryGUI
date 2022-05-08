@@ -46,7 +46,7 @@ publishing {
             pom {
                 name.set(rootProject.name)
                 description.set("This is minecraft gui library")
-                url.set("https://github.com/DevProject/InventoryGUI")
+                url.set("https://github.com/devproje/InventoryGUI")
                 licenses {
                     license {
                         name.set("GNU General Public License Version 3")
@@ -55,15 +55,15 @@ publishing {
                 }
                 developers {
                     developer {
-                        id.set("DevProject04")
-                        name.set("Dev_Project")
+                        id.set("devproje")
+                        name.set("Project_TL")
                         email.set("me@projecttl.net")
                     }
                 }
                 scm {
-                    connection.set("scm:git:https://github.com/DevProject04/InventoryGUI.git")
-                    developerConnection.set("scm:git:https://github.com/DevProject04/InventoryGUI.git")
-                    url.set("https://github.com/DevProject04/InventoryGUI.git")
+                    connection.set("scm:git:https://github.com/devproje/InventoryGUI.git")
+                    developerConnection.set("scm:git:https://github.com/devproje/InventoryGUI.git")
+                    url.set("https://github.com/devproje/InventoryGUI.git")
                 }
             }
         }
