@@ -57,6 +57,8 @@ $dokka.location:net.projecttl.inventory.util/InventoryType.CHEST_54///PointingTo
 $dokka.location:net.projecttl.inventory.util/InventoryType.CHEST_9///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/-c-h-e-s-t_9/index.html
 $dokka.location:net.projecttl.inventory.util/InventoryType///PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/index.html
 $dokka.location:net.projecttl.inventory.util/InventoryType/size/#/PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/size.html
+$dokka.location:net.projecttl.inventory.util/InventoryType/valueOf/#kotlin.String/PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/value-of.html
+$dokka.location:net.projecttl.inventory.util/InventoryType/values/#/PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/values.html
 $dokka.location:net.projecttl.inventory.util/LinkedSlot///PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-linked-slot/index.html
 $dokka.location:net.projecttl.inventory.util/LinkedSlot/LinkedSlot/#org.bukkit.inventory.ItemStack#net.projecttl.inventory.util.SlotHandler/PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-linked-slot/-linked-slot.html
 $dokka.location:net.projecttl.inventory.util/LinkedSlot/handler/#/PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-linked-slot/handler.html

@@ -6,10 +6,18 @@
     <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../";</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -21,6 +29,7 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
 </head>
 <body>
 <div class="navigation-wrapper" id="navigation-wrapper">
@@ -31,7 +40,7 @@ if(savedDarkMode === true){
             </a>
     </div>
     <div>
-4.4.0    </div>
+4.4.1    </div>
     <div class="pull-right d-flex">
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
@@ -43,10 +52,10 @@ if(savedDarkMode === true){
     </div>
     <div id="main">
 <div class="main-content" id="content" pageIds="InventoryGUI-api::net.projecttl.inventory/Animation///PointingToDeclaration//1851197523">
-  <div class="breadcrumbs"><a href="../../../index.html">InventoryGUI-api</a><span class="delimiter">/</span><a href="../index.html">net.projecttl.inventory</a><span class="delimiter">/</span><a href="index.html">Animation</a></div>
+  <div class="breadcrumbs"><a href="../../../index.html">InventoryGUI-api</a><span class="delimiter">/</span><a href="../index.html">net.projecttl.inventory</a><span class="delimiter">/</span><span class="current">Animation</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Animation</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">Animation</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>player<span class="token operator">: </span><span data-unresolved-link="org.bukkit.entity/Player///PointingToDeclaration/">Player</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>slotType<span class="token operator">: </span><a href="../../net.projecttl.inventory.util/-inventory-type/index.html">InventoryType</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>title<span class="token operator">: </span><span data-unresolved-link="net.kyori.adventure.text/Component///PointingToDeclaration/">Component</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Animation!</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">Animation</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>player<span class="token operator">: </span><span data-unresolved-link="org.bukkit.entity/Player///PointingToDeclaration/">Player</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>slotType<span class="token operator">: </span><a href="../../net.projecttl.inventory.util/-inventory-type/index.html">InventoryType</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>title<span class="token operator">: </span><span data-unresolved-link="net.kyori.adventure.text/Component///PointingToDeclaration/">Component</span></span></span><span class="token punctuation">)</span></div><p class="paragraph">Animation!</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
@@ -62,7 +71,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-animation.html"><span class="token function">Animation</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;player<span class="token operator">: </span><span data-unresolved-link="org.bukkit.entity/Player///PointingToDeclaration/">Player</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;slotType<span class="token operator">: </span><a href="../../net.projecttl.inventory.util/-inventory-type/index.html">InventoryType</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;title<span class="token operator">: </span><span data-unresolved-link="net.kyori.adventure.text/Component///PointingToDeclaration/">Component</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-animation.html"><span class="token function">Animation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">player<span class="token operator">: </span><span data-unresolved-link="org.bukkit.entity/Player///PointingToDeclaration/">Player</span><span class="token punctuation">, </span></span><span class="parameter ">slotType<span class="token operator">: </span><a href="../../net.projecttl.inventory.util/-inventory-type/index.html">InventoryType</a><span class="token punctuation">, </span></span><span class="parameter ">title<span class="token operator">: </span><span data-unresolved-link="net.kyori.adventure.text/Component///PointingToDeclaration/">Component</span></span></span><span class="token punctuation">)</span></div></div></div>
               </div>
             </div>
           </div>
@@ -79,7 +88,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="base.html"><span class="token function">base</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><span class="token keyword"></span><a href="../../net.projecttl.inventory.gui/-simple-inventory-builder/index.html">SimpleInventoryBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="base.html"><span class="token function">base</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><span class="token keyword"></span><a href="../../net.projecttl.inventory.gui/-simple-inventory-builder/index.html">SimpleInventoryBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div></div></div>
               </div>
             </div>
           </div>
@@ -94,7 +103,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="frame.html"><span class="token function">frame</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;tick<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;title<span class="token operator">: </span><span data-unresolved-link="net.kyori.adventure.text/Component///PointingToDeclaration/">Component</span><span class="token operator"> = </span>this.title<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;init<span class="token operator">: </span><span class="token keyword"></span><a href="../../net.projecttl.inventory.gui/-simple-inventory-builder/index.html">SimpleInventoryBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="frame.html"><span class="token function">frame</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tick<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">title<span class="token operator">: </span><span data-unresolved-link="net.kyori.adventure.text/Component///PointingToDeclaration/">Component</span><span class="token operator"> = </span>this.title<span class="token punctuation">, </span></span><span class="parameter ">init<span class="token operator">: </span><span class="token keyword"></span><a href="../../net.projecttl.inventory.gui/-simple-inventory-builder/index.html">SimpleInventoryBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div></div></div>
               </div>
             </div>
           </div>
@@ -109,7 +118,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-play.html"><span class="token function">onPlay</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">func<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span>ticks<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-play.html"><span class="token function">onPlay</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">func<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span>ticks<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div></div></div>
               </div>
             </div>
           </div>
@@ -124,7 +133,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-stop.html"><span class="token function">onStop</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">func<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-stop.html"><span class="token function">onStop</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">func<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div></div></div>
               </div>
             </div>
           </div>
@@ -139,7 +148,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="start.html"><span class="token function">start</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">resetTicks<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="start.html"><span class="token function">start</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">resetTicks<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></span></span><span class="token punctuation">)</span></div></div></div>
               </div>
             </div>
           </div>
@@ -154,7 +163,7 @@ if(savedDarkMode === true){
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="stop.html"><span class="token function">stop</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">closeGui<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="stop.html"><span class="token function">stop</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">closeGui<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span></div></div></div>
               </div>
             </div>
           </div>
@@ -165,13 +174,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":InventoryGUI-api:dokkaHtml/main" data-filterable-set=":InventoryGUI-api:dokkaHtml/main">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="base.html">base</a></div>
+                <div><a href="base.html"><span><span>base</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1403475136%2FProperties%2F1851197523"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="1403475136%2FProperties%2F1851197523" anchor-label="base" id="1403475136%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">lateinit </span><span class="token keyword">var </span><a href="base.html">base</a><span class="token operator">: </span><a href="../../net.projecttl.inventory.gui/-inventory-builder/index.html">InventoryBuilder</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="1403475136%2FProperties%2F1851197523" anchor-label="base" id="1403475136%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">lateinit </span><span class="token keyword">var </span><a href="base.html">base</a><span class="token operator">: </span><a href="../../net.projecttl.inventory.gui/-inventory-builder/index.html">InventoryBuilder</a></div></div></div>
               </div>
             </div>
           </div>
@@ -180,13 +189,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":InventoryGUI-api:dokkaHtml/main" data-filterable-set=":InventoryGUI-api:dokkaHtml/main">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="frames.html">frames</a></div>
+                <div><a href="frames.html"><span><span>frames</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1910520949%2FProperties%2F1851197523"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="-1910520949%2FProperties%2F1851197523" anchor-label="frames" id="-1910520949%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="frames.html">frames</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html">TreeMap</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../net.projecttl.inventory.gui/-simple-inventory-builder/index.html">SimpleInventoryBuilder</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="-1910520949%2FProperties%2F1851197523" anchor-label="frames" id="-1910520949%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="frames.html">frames</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html">TreeMap</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../net.projecttl.inventory.gui/-simple-inventory-builder/index.html">SimpleInventoryBuilder</a><span class="token operator">&gt;</span></div></div></div>
               </div>
             </div>
           </div>
@@ -195,13 +204,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":InventoryGUI-api:dokkaHtml/main" data-filterable-set=":InventoryGUI-api:dokkaHtml/main">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="last-available-ticks.html">lastAvailableTicks</a></div>
+                <div><a href="last-available-ticks.html"><span>last</span><wbr></wbr><span>Available</span><wbr></wbr><span><span>Ticks</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-694232210%2FProperties%2F1851197523"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="-694232210%2FProperties%2F1851197523" anchor-label="lastAvailableTicks" id="-694232210%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="last-available-ticks.html">lastAvailableTicks</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="-694232210%2FProperties%2F1851197523" anchor-label="lastAvailableTicks" id="-694232210%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="last-available-ticks.html">lastAvailableTicks</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div></div></div>
               </div>
             </div>
           </div>
@@ -210,13 +219,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":InventoryGUI-api:dokkaHtml/main" data-filterable-set=":InventoryGUI-api:dokkaHtml/main">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="on-play-animation.html">onPlayAnimation</a></div>
+                <div><a href="on-play-animation.html"><span>on</span><wbr></wbr><span>Play</span><wbr></wbr><span><span>Animation</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1209530728%2FProperties%2F1851197523"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="-1209530728%2FProperties%2F1851197523" anchor-label="onPlayAnimation" id="-1209530728%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">lateinit </span><span class="token keyword">var </span><a href="on-play-animation.html">onPlayAnimation</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span>ticks<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="-1209530728%2FProperties%2F1851197523" anchor-label="onPlayAnimation" id="-1209530728%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">lateinit </span><span class="token keyword">var </span><a href="on-play-animation.html">onPlayAnimation</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span>ticks<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></div></div></div>
               </div>
             </div>
           </div>
@@ -225,13 +234,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":InventoryGUI-api:dokkaHtml/main" data-filterable-set=":InventoryGUI-api:dokkaHtml/main">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="on-stop-event.html">onStopEvent</a></div>
+                <div><a href="on-stop-event.html"><span>on</span><wbr></wbr><span>Stop</span><wbr></wbr><span><span>Event</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1117592592%2FProperties%2F1851197523"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="1117592592%2FProperties%2F1851197523" anchor-label="onStopEvent" id="1117592592%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">lateinit </span><span class="token keyword">var </span><a href="on-stop-event.html">onStopEvent</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="1117592592%2FProperties%2F1851197523" anchor-label="onStopEvent" id="1117592592%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">lateinit </span><span class="token keyword">var </span><a href="on-stop-event.html">onStopEvent</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></div></div></div>
               </div>
             </div>
           </div>
@@ -240,13 +249,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":InventoryGUI-api:dokkaHtml/main" data-filterable-set=":InventoryGUI-api:dokkaHtml/main">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="player.html">player</a></div>
+                <div><a href="player.html"><span><span>player</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1558276688%2FProperties%2F1851197523"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="-1558276688%2FProperties%2F1851197523" anchor-label="player" id="-1558276688%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="player.html">player</a><span class="token operator">: </span><span data-unresolved-link="org.bukkit.entity/Player///PointingToDeclaration/">Player</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="-1558276688%2FProperties%2F1851197523" anchor-label="player" id="-1558276688%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="player.html">player</a><span class="token operator">: </span><span data-unresolved-link="org.bukkit.entity/Player///PointingToDeclaration/">Player</span></div></div></div>
               </div>
             </div>
           </div>
@@ -255,13 +264,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":InventoryGUI-api:dokkaHtml/main" data-filterable-set=":InventoryGUI-api:dokkaHtml/main">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="slot-type.html">slotType</a></div>
+                <div><a href="slot-type.html"><span>slot</span><wbr></wbr><span><span>Type</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1381312231%2FProperties%2F1851197523"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="-1381312231%2FProperties%2F1851197523" anchor-label="slotType" id="-1381312231%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="slot-type.html">slotType</a><span class="token operator">: </span><a href="../../net.projecttl.inventory.util/-inventory-type/index.html">InventoryType</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="-1381312231%2FProperties%2F1851197523" anchor-label="slotType" id="-1381312231%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="slot-type.html">slotType</a><span class="token operator">: </span><a href="../../net.projecttl.inventory.util/-inventory-type/index.html">InventoryType</a></div></div></div>
               </div>
             </div>
           </div>
@@ -270,13 +279,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":InventoryGUI-api:dokkaHtml/main" data-filterable-set=":InventoryGUI-api:dokkaHtml/main">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="task-id.html">taskId</a></div>
+                <div><a href="task-id.html"><span>task</span><wbr></wbr><span><span>Id</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1288019953%2FProperties%2F1851197523"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="1288019953%2FProperties%2F1851197523" anchor-label="taskId" id="1288019953%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="task-id.html">taskId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="1288019953%2FProperties%2F1851197523" anchor-label="taskId" id="1288019953%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="task-id.html">taskId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div></div></div>
               </div>
             </div>
           </div>
@@ -285,13 +294,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":InventoryGUI-api:dokkaHtml/main" data-filterable-set=":InventoryGUI-api:dokkaHtml/main">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="tick.html">tick</a></div>
+                <div><a href="tick.html"><span><span>tick</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="936675188%2FProperties%2F1851197523"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="936675188%2FProperties%2F1851197523" anchor-label="tick" id="936675188%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="tick.html">tick</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">0</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="936675188%2FProperties%2F1851197523" anchor-label="tick" id="936675188%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="tick.html">tick</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">0</span></div></div></div>
               </div>
             </div>
           </div>
@@ -300,13 +309,13 @@ if(savedDarkMode === true){
         <div class="table-row" data-filterable-current=":InventoryGUI-api:dokkaHtml/main" data-filterable-set=":InventoryGUI-api:dokkaHtml/main">
           <div class="main-subrow keyValue ">
             <div class=""><span class="inline-flex">
-                <div><a href="title.html">title</a></div>
+                <div><a href="title.html"><span><span>title</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1030197297%2FProperties%2F1851197523"></span>
                   <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="1030197297%2FProperties%2F1851197523" anchor-label="title" id="1030197297%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="title.html">title</a><span class="token operator">: </span><span data-unresolved-link="net.kyori.adventure.text/Component///PointingToDeclaration/">Component</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":InventoryGUI-api:dokkaHtml/main"><a data-name="1030197297%2FProperties%2F1851197523" anchor-label="title" id="1030197297%2FProperties%2F1851197523" data-filterable-set=":InventoryGUI-api:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="title.html">title</a><span class="token operator">: </span><span data-unresolved-link="net.kyori.adventure.text/Component///PointingToDeclaration/">Component</span></div></div></div>
               </div>
             </div>
           </div>
@@ -315,10 +324,11 @@ if(savedDarkMode === true){
     </div>
   </div>
 </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span
                 class="pull-right"><span>Generated by </span><a
                 href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-        </div>
+      </div>
     </div>
 </div>
 </body>
