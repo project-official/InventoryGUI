@@ -1,13 +1,13 @@
 plugins {
     java
-    kotlin("jvm") version "1.6.21"
-    id("org.jetbrains.dokka") version "1.6.21"
+    kotlin("jvm") version "1.7.22"
+    id("org.jetbrains.dokka") version "1.7.20"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     `maven-publish`
 }
 
 group = "net.projecttl"
-version = "4.4.0"
+version = "4.4.1"
 
 allprojects {
     apply(plugin = "com.github.johnrengelman.shadow")
@@ -38,7 +38,7 @@ subprojects {
 
     dependencies {
         implementation(kotlin("stdlib"))
-        compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
         if (this@subprojects.name != "InventoryGUI-api") {
             dependencies {
                 implementation(project(":InventoryGUI-api"))
