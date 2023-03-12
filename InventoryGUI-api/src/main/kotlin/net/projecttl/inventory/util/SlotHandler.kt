@@ -7,7 +7,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
  */
 class SlotHandler {
     @Suppress("WeakerAccess")
-    val click = ArrayList<(InventoryClickEvent) -> Unit>()
+    val click = arrayListOf<(InventoryClickEvent) -> Unit>()
 
     fun onClick(action: (InventoryClickEvent) -> Unit) {
         click.add(action)

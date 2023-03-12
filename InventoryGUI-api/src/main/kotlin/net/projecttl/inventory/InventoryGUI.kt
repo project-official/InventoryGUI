@@ -22,7 +22,7 @@ object InventoryGUI {
     /**
      * A list of registered inventory id
      */
-    val inventoryIds = HashMap<UUID, InventoryBuilder>()
+    val inventoryIds = hashMapOf<UUID, InventoryBuilder>()
 
     /**
      * The service plugin. Defaults to the plugin that loaded this library. You can modify this later if you want to

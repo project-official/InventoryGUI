@@ -6,6 +6,7 @@ import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.PluginClassLoader
 
 // from https://github.com/monun/heartbeat-coroutines/blob/master/heartbeat-coroutines/src/main/kotlin/io/github/monun/heartbeat/coroutines/Downstream.kt
+@Suppress("UnstableApiUsage")
 internal object Downstream {
     private val classLoaderFields
         get() = PluginClassLoader::class.java.declaredFields.filter {

@@ -1,13 +1,14 @@
 plugins {
     java
-    kotlin("jvm") version "1.7.22"
-    id("org.jetbrains.dokka") version "1.7.20"
+    kotlin("jvm") version "1.8.10"
+    id("org.jetbrains.dokka") version "1.8.10"
     id("com.github.johnrengelman.shadow") version "7.1.2"
+
     `maven-publish`
 }
 
 group = "net.projecttl"
-version = "4.4.1"
+version = "4.5.0"
 
 allprojects {
     apply(plugin = "com.github.johnrengelman.shadow")

@@ -4,7 +4,7 @@ package net.projecttl.inventory.util
  * An observable type of hashmaps. Triggers observers on data input.
  */
 class ObservableHashMap<K, V>: HashMap<K, V>() {
-    private val observers = ArrayList<(Pair<K, V>) -> Unit>()
+    private val observers = arrayListOf<(Pair<K, V>) -> Unit>()
 
     fun trigger(key: K, value: V) {
         observers.forEach {

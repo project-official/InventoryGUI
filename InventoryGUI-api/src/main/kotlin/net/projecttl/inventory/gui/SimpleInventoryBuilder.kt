@@ -19,11 +19,12 @@ import org.bukkit.inventory.ItemStack
 import java.util.*
 import kotlin.collections.HashMap
 
-class SimpleInventoryBuilder(override val player: Player, override val slotType: InventoryType, override val title: Component) : Listener,
-    InventoryBuilder {
-
+class SimpleInventoryBuilder(
+    override val player: Player,
+    override val slotType: InventoryType,
+    override val title: Component
+) : Listener, InventoryBuilder {
     override val slots = HashMap<Int, Slot>()
-    
     val closeHandlers = ArrayList<InventoryCloseEvent.() -> Unit>()
 
     @Suppress("WeakerAccess")

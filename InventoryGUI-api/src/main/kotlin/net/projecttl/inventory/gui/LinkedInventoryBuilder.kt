@@ -21,9 +21,11 @@ import java.util.*
 /**
  * build 함수 실행 후에도 인벤토리를 수정할 수 있는 InventoryBuilder 입니다.
  */
-data class LinkedInventoryBuilder(override val player: Player, override val slotType: InventoryType, override val title: Component): Listener,
-    InventoryBuilder {
-
+data class LinkedInventoryBuilder(
+    override val player: Player,
+    override val slotType: InventoryType,
+    override val title: Component
+): Listener, InventoryBuilder {
     override val slots = ObservableHashMap<Int, LinkedSlot>()
     override val id: UUID = UUID.randomUUID()
     override lateinit var inventory: Inventory
