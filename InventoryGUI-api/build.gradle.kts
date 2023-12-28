@@ -22,7 +22,7 @@ tasks {
     create<Jar>("javadocJar") {
         archiveClassifier.set("javadoc")
         dependsOn("dokkaHtml")
-        from("$buildDir/dokka/html")
+        from("${projectDir}/build/dokka/html")
     }
 }
 
