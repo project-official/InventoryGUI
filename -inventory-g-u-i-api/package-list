@@ -56,6 +56,7 @@ $dokka.location:net.projecttl.inventory.util/InventoryType.CHEST_45///PointingTo
 $dokka.location:net.projecttl.inventory.util/InventoryType.CHEST_54///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/-c-h-e-s-t_54/index.html
 $dokka.location:net.projecttl.inventory.util/InventoryType.CHEST_9///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/-c-h-e-s-t_9/index.html
 $dokka.location:net.projecttl.inventory.util/InventoryType///PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/index.html
+$dokka.location:net.projecttl.inventory.util/InventoryType/entries/#/PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/entries.html
 $dokka.location:net.projecttl.inventory.util/InventoryType/size/#/PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/size.html
 $dokka.location:net.projecttl.inventory.util/InventoryType/valueOf/#kotlin.String/PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/value-of.html
 $dokka.location:net.projecttl.inventory.util/InventoryType/values/#/PointingToDeclaration/-inventory-g-u-i-api/net.projecttl.inventory.util/-inventory-type/values.html
