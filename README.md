@@ -72,7 +72,7 @@ dependencies {
 ```
 # ...
 libraries:
-  - net.projecttl.InventoryGUI-api:VERSION
+  - net.projecttl:InventoryGUI-api:VERSION
 # ...
 ```
 
