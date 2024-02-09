@@ -22,7 +22,8 @@ import kotlin.collections.HashMap
 class SimpleInventoryBuilder(
     override val player: Player,
     override val slotType: InventoryType,
-    override val title: Component
+    override val title: Component,
+    val access: Boolean
 ) : Listener, InventoryBuilder {
     override val slots = HashMap<Int, Slot>()
     val closeHandlers = ArrayList<InventoryCloseEvent.() -> Unit>()
@@ -68,6 +69,10 @@ class SimpleInventoryBuilder(
         if(event.view.title() == this.title) {
             if (inventoryIds.contains(id) && event.currentItem != null && event.view.player == player) {
                 if (event.inventory == inventory) {
+                    if (!access) {
+                        event.isCancelled = true
+                    }
+
                     for (slot in slots.entries) {
                         if (slot.key == event.rawSlot){
                             event.isCancelled = true

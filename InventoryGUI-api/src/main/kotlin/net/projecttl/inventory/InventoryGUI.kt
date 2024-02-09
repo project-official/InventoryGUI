@@ -51,12 +51,13 @@ object InventoryGUI {
  *
  * @param title The title of the inventory. This is the text shown at the top of the inventory.
  * @param slotType The Inventory's Size. Defaults to 27(3 * 9) if not set.
+ * @param access Allow click player's storage area.
  * @param init Initialize the inventory builder. Creates a default inventory if not set.
  *
  * @return The built inventory
  */
-fun Player.gui(title: Component, slotType: InventoryType = InventoryType.CHEST_27, init: SimpleInventoryBuilder.() -> Unit = {}): Inventory {
-    return SimpleInventoryBuilder(this, slotType, title).apply(init).build()
+fun Player.gui(title: Component, slotType: InventoryType = InventoryType.CHEST_27, access: Boolean = true, init: SimpleInventoryBuilder.() -> Unit = {}): Inventory {
+    return SimpleInventoryBuilder(this, slotType, title, access).apply(init).build()
 }
 
 /**
