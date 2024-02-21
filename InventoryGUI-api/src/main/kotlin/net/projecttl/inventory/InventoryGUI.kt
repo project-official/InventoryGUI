@@ -56,7 +56,7 @@ object InventoryGUI {
  *
  * @return The built inventory
  */
-fun Player.gui(title: Component, slotType: InventoryType = InventoryType.CHEST_27, access: Boolean = true, init: SimpleInventoryBuilder.() -> Unit = {}): Inventory {
+fun Player.gui(title: Component, slotType: InventoryType = InventoryType.CHEST_27, access: Boolean = false, init: SimpleInventoryBuilder.() -> Unit = {}): Inventory {
     return SimpleInventoryBuilder(this, slotType, title, access).apply(init).build()
 }
 

@@ -23,7 +23,7 @@ class SimpleInventoryBuilder(
     override val player: Player,
     override val slotType: InventoryType,
     override val title: Component,
-    val access: Boolean
+    val access: Boolean = false
 ) : Listener, InventoryBuilder {
     override val slots = HashMap<Int, Slot>()
     val closeHandlers = ArrayList<InventoryCloseEvent.() -> Unit>()
