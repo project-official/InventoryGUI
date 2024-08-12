@@ -1,23 +1,23 @@
 plugins {
     java
-    kotlin("jvm") version "1.9.22"
-    id("org.jetbrains.dokka") version "1.9.10"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    kotlin("jvm") version "2.0.0"
+    id("com.gradleup.shadow") version "8.3.0"
+    id("org.jetbrains.dokka") version "1.9.20"
 
     `maven-publish`
 }
 
 group = "net.projecttl"
-version = "4.5.2"
+version = "4.6.0"
 
 allprojects {
-    apply(plugin = "com.github.johnrengelman.shadow")
+    apply(plugin = "com.gradleup.shadow")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.dokka")
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(17))
+            languageVersion.set(JavaLanguageVersion.of(21))
         }
     }
 
@@ -39,7 +39,7 @@ subprojects {
 
     dependencies {
         implementation(kotlin("stdlib"))
-        compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
         if (this@subprojects.name != "InventoryGUI-api") {
             dependencies {
                 implementation(project(":InventoryGUI-api"))

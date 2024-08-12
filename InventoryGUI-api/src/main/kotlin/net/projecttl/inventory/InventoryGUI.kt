@@ -2,18 +2,14 @@ package net.projecttl.inventory
 
 import net.kyori.adventure.text.Component
 import net.projecttl.inventory.gui.InventoryBuilder
-import net.projecttl.inventory.gui.SimpleInventoryBuilder
 import net.projecttl.inventory.gui.LinkedInventoryBuilder
+import net.projecttl.inventory.gui.SimpleInventoryBuilder
 import net.projecttl.inventory.util.Downstream
 import net.projecttl.inventory.util.InventoryType
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
-import org.bukkit.plugin.InvalidPluginException
 import org.bukkit.plugin.Plugin
-import org.bukkit.plugin.java.JavaPlugin
-import org.bukkit.plugin.java.PluginClassLoader
 import java.util.*
-import kotlin.collections.HashMap
 
 /**
  * InventoryGUI Data
@@ -30,6 +26,7 @@ object InventoryGUI {
      * @throws InvalidPluginException if the current library isn't loaded by a plugin
      */
     var plugin: Plugin = Downstream.pullPlugin()
+        private set
     /*
     var plugin: JavaPlugin = javaClass.classLoader.run {
         fun checkLoader(classLoader: ClassLoader): ClassLoader {
@@ -51,13 +48,12 @@ object InventoryGUI {
  *
  * @param title The title of the inventory. This is the text shown at the top of the inventory.
  * @param slotType The Inventory's Size. Defaults to 27(3 * 9) if not set.
- * @param access Allow click player's storage area.
  * @param init Initialize the inventory builder. Creates a default inventory if not set.
  *
  * @return The built inventory
  */
-fun Player.gui(title: Component, slotType: InventoryType = InventoryType.CHEST_27, access: Boolean = false, init: SimpleInventoryBuilder.() -> Unit = {}): Inventory {
-    return SimpleInventoryBuilder(this, slotType, title, access).apply(init).build()
+fun Player.gui(title: Component, slotType: InventoryType = InventoryType.CHEST_27, init: SimpleInventoryBuilder.() -> Unit = {}): Inventory {
+    return SimpleInventoryBuilder(this, slotType, title).apply(init).build()
 }
 
 /**

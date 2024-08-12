@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -7,7 +8,7 @@ plugins {
 
 tasks {
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
     }
 
     withType<Javadoc> {
@@ -52,7 +53,7 @@ publishing {
             pom {
                 name.set(rootProject.name)
                 description.set("This is minecraft gui library")
-                url.set("https://github.com/devproje/InventoryGUI")
+                url.set("https://github.com/project-official/InventoryGUI")
                 licenses {
                     license {
                         name.set("GNU General Public License Version 3")
@@ -62,14 +63,14 @@ publishing {
                 developers {
                     developer {
                         id.set("devproje")
-                        name.set("Project_TL")
+                        name.set("Project_IO")
                         email.set("me@projecttl.net")
                     }
                 }
                 scm {
-                    connection.set("scm:git:https://github.com/devproje/InventoryGUI.git")
-                    developerConnection.set("scm:git:https://github.com/devproje/InventoryGUI.git")
-                    url.set("https://github.com/devproje/InventoryGUI.git")
+                    connection.set("scm:git:https://github.com/project-official/InventoryGUI.git")
+                    developerConnection.set("scm:git:https://github.com/project-official/InventoryGUI.git")
+                    url.set("https://github.com/project-official/InventoryGUI.git")
                 }
             }
         }

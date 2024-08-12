@@ -5,6 +5,7 @@ import net.projecttl.inventory.InventoryGUI.inventoryIds
 import net.projecttl.inventory.InventoryGUI.plugin
 import net.projecttl.inventory.util.InventoryType
 import net.projecttl.inventory.util.Slot
+import net.projecttl.inventory.util.compareTo
 import org.bukkit.Bukkit
 import org.bukkit.block.Container
 import org.bukkit.entity.Player
@@ -17,13 +18,11 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import java.util.*
-import kotlin.collections.HashMap
 
 class SimpleInventoryBuilder(
     override val player: Player,
     override val slotType: InventoryType,
-    override val title: Component,
-    val access: Boolean = false
+    override val title: Component
 ) : Listener, InventoryBuilder {
     override val slots = HashMap<Int, Slot>()
     val closeHandlers = ArrayList<InventoryCloseEvent.() -> Unit>()
@@ -40,13 +39,13 @@ class SimpleInventoryBuilder(
     override fun slot(slot: Int, item: ItemStack, handler: InventoryClickEvent.() -> Unit) {
         slots[slot] = Slot(item, handler)
     }
-    
-    override fun onClose(handler: InventoryCloseEvent.() -> Unit) {
-        closeHandlers.add(handler)
-    }
 
     override fun slot(slot: Int, item: ItemStack) {
         slot(slot, item) {}
+    }
+    
+    override fun onClose(handler: InventoryCloseEvent.() -> Unit) {
+        closeHandlers.add(handler)
     }
 
     override fun close() {
@@ -65,18 +64,14 @@ class SimpleInventoryBuilder(
     }
 
     @EventHandler
-    private fun listener(event: InventoryClickEvent) {
-        if(event.view.title() == this.title) {
-            if (inventoryIds.contains(id) && event.currentItem != null && event.view.player == player) {
-                if (event.inventory == inventory) {
-                    if (!access) {
-                        event.isCancelled = true
-                    }
-
+    private fun InventoryClickEvent.listener() {
+        if (title.compareTo(this.view.title())) {
+            if (inventoryIds.contains(id) && this.currentItem != null && this.view.player == player) {
+                if (this.inventory == inventory) {
                     for (slot in slots.entries) {
-                        if (slot.key == event.rawSlot){
-                            event.isCancelled = true
-                            slot.value.click(event)
+                        if (slot.key == this.rawSlot){
+                            this.isCancelled = true
+                            slot.value.click(this)
                         }
                     }
                 }
@@ -85,24 +80,24 @@ class SimpleInventoryBuilder(
     }
 
     @EventHandler
-    private fun listener2(event: InventoryMoveItemEvent) {
-        if (inventoryIds.contains(id) && event.source.holder?.inventory?.viewers?.contains(player)!!
-            && event.source.holder is Container && (event.source.holder as Container).customName() == this.title)
-                event.isCancelled = true
+    private fun InventoryMoveItemEvent.listener2() {
+        if (inventoryIds.contains(id) && this.source.holder?.inventory?.viewers?.contains(player)!!
+            && this.source.holder is Container && (this.source.holder as Container).customName() == title)
+                this.isCancelled = true
     }
 
     @EventHandler
-    private fun listener3(event: InventoryCloseEvent) {
+    private fun InventoryCloseEvent.listener3() {
         for(closeHandler in closeHandlers)
-            closeHandler(event)
-        if(event.view.player == player && inventoryIds.contains(id))
+            closeHandler(this)
+        if(this.view.player == player && inventoryIds.contains(id))
             inventoryIds.remove(id)
     }
 
     @EventHandler
-    private fun listener4(event: PlayerSwapHandItemsEvent) {
-        if (event.player.inventory == inventory) {
-            event.isCancelled = true
+    private fun PlayerSwapHandItemsEvent.listener4() {
+        if (this.player.inventory == inventory) {
+            this.isCancelled = true
         }
     }
 

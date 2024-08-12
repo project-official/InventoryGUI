@@ -51,7 +51,7 @@ class Animation(val player: Player, val slotType: InventoryType, val title: Comp
         }
         running = true
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, {
-            if(running) {
+            if (running) {
                 if(frames.contains(tick)) {
                     lastAvailableTicks = tick
                     val inv = base.build()

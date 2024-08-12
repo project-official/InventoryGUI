@@ -1,13 +1,11 @@
 package net.projecttl.inventorygui.test
 
 import io.papermc.paper.event.player.AsyncChatEvent
-import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.Component.text
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import net.projecttl.inventory.animatedGui
 import net.projecttl.inventory.gui
-import net.projecttl.inventory.util.InventoryType
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -17,17 +15,20 @@ import org.bukkit.plugin.java.JavaPlugin
 import kotlin.random.Random
 
 class InventoryGuiTest : JavaPlugin(), Listener {
+    lateinit var instance: InventoryGuiTest
+        private set
 
     override fun onEnable() {
+        instance = this
         server.pluginManager.registerEvents(this, this)
     }
 
     @EventHandler
-    fun chat(event: AsyncChatEvent) {
-        if(PlainTextComponentSerializer.plainText().serialize(event.message()).contains("animation")) {
-            println(PlainTextComponentSerializer.plainText().serialize(event.message()))
-            Bukkit.getScheduler().scheduleSyncDelayedTask(this) {
-                val anim = event.player.animatedGui(text("Hi", NamedTextColor.GREEN)) {
+    fun AsyncChatEvent.chat() {
+        if(PlainTextComponentSerializer.plainText().serialize(this.message()).contains("animation")) {
+            println(PlainTextComponentSerializer.plainText().serialize(this.message()))
+            Bukkit.getScheduler().scheduleSyncDelayedTask(instance) {
+                val anim = this.player.animatedGui(text("Hi", NamedTextColor.GREEN)) {
                     base {
                         slot(0, ItemStack(Material.WHITE_STAINED_GLASS_PANE))
                         slot(1, ItemStack(Material.WHITE_STAINED_GLASS_PANE))
@@ -83,9 +84,9 @@ class InventoryGuiTest : JavaPlugin(), Listener {
                 }
                 anim.start()
             }
-        } else if(PlainTextComponentSerializer.plainText().serialize(event.message()).contains("normal")) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(this) {
-                event.player.gui(text("")) {
+        } else if(PlainTextComponentSerializer.plainText().serialize(this.message()).contains("normal")) {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(instance) {
+                this.player.gui(text("")) {
                     slot(1, ItemStack(Material.IRON_INGOT))
                 }
             }

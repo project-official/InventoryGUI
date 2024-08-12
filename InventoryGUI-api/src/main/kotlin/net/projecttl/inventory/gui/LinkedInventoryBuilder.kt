@@ -7,6 +7,7 @@ import net.projecttl.inventory.util.InventoryType
 import net.projecttl.inventory.util.LinkedSlot
 import net.projecttl.inventory.util.ObservableHashMap
 import net.projecttl.inventory.util.SlotHandler
+import net.projecttl.inventory.util.compareTo
 import org.bukkit.Bukkit
 import org.bukkit.block.Container
 import org.bukkit.entity.Player
@@ -75,15 +76,15 @@ data class LinkedInventoryBuilder(
     }
 
     @EventHandler
-    private fun listener(event: InventoryClickEvent) {
-        if(event.view.title() == this.title) {
-            if (inventoryIds.contains(id) && event.currentItem != null && event.view.player == player) {
-                if (event.inventory == inventory) {
+    private fun InventoryClickEvent.listener() {
+        if (title.compareTo(this.view.title())) {
+            if (inventoryIds.contains(id) && this.currentItem != null && this.view.player == player) {
+                if (this.inventory == inventory) {
                     for (slot in slots.entries) {
-                        if (slot.key == event.rawSlot){
-                            event.isCancelled = true
+                        if (slot.key == this.rawSlot){
+                            this.isCancelled = true
                             slot.value.handler.click.forEach {
-                                it(event)
+                                it(this)
                             }
                         }
                     }
@@ -92,28 +93,26 @@ data class LinkedInventoryBuilder(
         }
     }
 
-    @EventHandler
-    private fun listener2(event: InventoryMoveItemEvent) {
-        if (inventoryIds.contains(id) && event.source.holder?.inventory?.viewers?.contains(player)!!
-            && event.source.holder is Container && (event.source.holder as Container).customName() == this.title
+    private fun InventoryMoveItemEvent.listener2() {
+        if (inventoryIds.contains(id) && this.source.holder?.inventory?.viewers?.contains(player)!!
+            && this.source.holder is Container && (this.source.holder as Container).customName() == title
         )
-            event.isCancelled = true
+            this.isCancelled = true
     }
 
     @EventHandler
-    private fun listener3(event: InventoryCloseEvent) {
+    private fun InventoryCloseEvent.listener3() {
         for(closeHandler in closeHandlers) {
-            closeHandler(event)
+            closeHandler(this)
         }
-        if (event.view.player == player && inventoryIds.contains(id))
+        if (this.view.player == player && inventoryIds.contains(id))
             inventoryIds.remove(id)
     }
 
     @EventHandler
-    private fun listener4(event: PlayerSwapHandItemsEvent) {
-        if (event.player.inventory == inventory) {
-            event.isCancelled = true
-
+    private fun PlayerSwapHandItemsEvent.listener4() {
+        if (this.player.inventory == inventory) {
+            this.isCancelled = true
         }
     }
 }
